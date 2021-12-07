@@ -17,12 +17,13 @@ public class cameracontroller : MonoBehaviour
         Quaternion rot = transform.rotation;
 
         if (Input.GetKey("q")){
-            rot.y -= speed * Time.deltaTime;
+
+            //rot.y -= speed * Time.deltaTime;
 
         }
         if (Input.GetKey("e"))
         {
-            rot.y += speed * Time.deltaTime;
+            //rot.y += speed * Time.deltaTime;
 
         }
 
