@@ -1,64 +1,100 @@
 
+
 using UnityEngine;
 
 public class cameracontroller : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 200f;
+   
+    public float speedZ = 0f;
+    public float speedX = 0f;
 
     public float panBorderThickness = 10f;
 
 
-    // Update is called once per frame
     void Update()
     {
 
-        Vector3 pos = transform.position;
-        Quaternion rot = transform.rotation;
+        transform.Translate(speedX * Time.deltaTime, 0, speedZ * Time.deltaTime, Space.Self);
 
-        if (Input.GetKey("q")){
 
-            //rot.y -= speed * Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+
+            speedZ = 100f;
 
         }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+
+            speedZ = 0f;
+
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+
+            speedZ = -100f;
+
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+
+            speedZ = 0f;
+
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+
+            speedX = -100f;
+
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+
+            speedX = 0f;
+
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+
+            speedX = 100f;
+
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+
+            speedX = 0f;
+
+        }
+
+
+
+        if (Input.GetKey("q"))
+        {
+
+            transform.Rotate(0, -1, 0);
+
+
+        }
+
+
         if (Input.GetKey("e"))
         {
-            //rot.y += speed * Time.deltaTime;
 
-        }
-
-
-        if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness){
-
-            pos.z += speed * Time.deltaTime;
-
-
-        }
-        if (Input.GetKey("s") || Input.mousePosition.y <= panBorderThickness)
-        {
-
-            pos.z -= speed * Time.deltaTime;
-
-
-        }
-        if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panBorderThickness)
-        {
-
-            pos.x += speed * Time.deltaTime;
-
-
-        }
-        if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThickness)
-        {
-
-            pos.x -= speed * Time.deltaTime;
+            transform.Rotate(0, 1, 0);
 
 
         }
 
-        transform.position = pos;
-        transform.rotation = rot;
+
+
 
 
     }
 }
+
