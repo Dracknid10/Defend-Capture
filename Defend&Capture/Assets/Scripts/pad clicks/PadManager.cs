@@ -6,22 +6,24 @@ public class PadManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject pad0;
-    public GameObject pad1;
-    public GameObject pad2;
-    public GameObject pad3;
-    public GameObject pad4;
-    public GameObject pad5;
-    public GameObject pad6;
+    public GameObject BarracksLVL1;
+    public GameObject SupplyPadLVL1;
 
-    public GameObject Barracks;
+
 
     public string BuildingToBuild;
 
     [SerializeField] private GameObject SelectedPad;
 
+    private Vector3 spawnPos;
+
+    
+
+
     void Start()
     {
+
+
         
        
 
@@ -60,7 +62,51 @@ public class PadManager : MonoBehaviour
 
 
 
-        return Building;
+        return BuildingToBuild;
     }
+
+
+    public void BuildBuilding()
+    {
+
+
+
+        spawnPos = SelectedPad.transform.GetChild(0).gameObject.transform.position;
+
+
+
+        if (BuildingToBuild == "Barracks")
+        {
+
+            if (SelectedPad != null)
+            {
+
+                GameObject Building = (GameObject)Instantiate(BarracksLVL1);
+                Building.transform.position = spawnPos;
+
+            }
+
+
+        }
+
+
+        if (BuildingToBuild == "Supply Pad")
+        {
+
+            if (SelectedPad != null)
+            {
+
+                GameObject Building = (GameObject)Instantiate(SupplyPadLVL1);
+                Building.transform.position = spawnPos;
+
+            }
+
+
+        }
+
+
+
+    }
+
 
 }

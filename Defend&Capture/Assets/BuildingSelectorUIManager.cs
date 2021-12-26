@@ -24,6 +24,7 @@ public class BuildingSelectorUIManager : MonoBehaviour
     {
 
         pass.selectedBuilding("Barracks");
+        pass.BuildBuilding();
 
     }
 
@@ -31,6 +32,7 @@ public class BuildingSelectorUIManager : MonoBehaviour
     {
 
         pass.selectedBuilding("Supply Pad");
+        pass.BuildBuilding();
 
     }
 
@@ -38,6 +40,7 @@ public class BuildingSelectorUIManager : MonoBehaviour
     {
 
         pass.selectedBuilding("Reactor");
+        pass.BuildBuilding();
 
     }
 
@@ -45,6 +48,7 @@ public class BuildingSelectorUIManager : MonoBehaviour
     {
 
         pass.selectedBuilding("Vehicle Depo");
+        pass.BuildBuilding();
 
     }
 
@@ -52,7 +56,7 @@ public class BuildingSelectorUIManager : MonoBehaviour
     {
 
         pass.selectedBuilding("Air Pad");
-
+        pass.BuildBuilding();
     }
 
 
