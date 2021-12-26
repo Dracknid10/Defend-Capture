@@ -5,10 +5,38 @@ using UnityEngine;
 public class clickPad0 : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    private PadManager pass;
+
+    public GameObject spawn;
+
+    public GameObject BuildingPadUi;
+    public Animator UiAnimation;
+
+   
+    void Start()
+    {
+
+        pass = FindObjectOfType<PadManager>();
+
+
+        UiAnimation = BuildingPadUi.GetComponent<Animator>();
+
+
+    }
+
     void OnMouseDown()
     {
 
-        Debug.Log("Pad 0 was clicked");
+        pass.selectedpad(gameObject);
+
+       
+        UiAnimation.SetBool("Ui true", true);
+        UiAnimation.SetBool("Ui Off", false);
+        UiAnimation.SetBool("Ui On", true);
+
+
+
 
     }
 
