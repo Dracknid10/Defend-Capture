@@ -8,12 +8,11 @@ public class clickPad0 : MonoBehaviour
 
     private PadManager pass;
 
-    public GameObject spawn;
-
     public GameObject BuildingPadUi;
     public Animator UiAnimation;
 
-   
+    public bool builtUpon = false;
+
     void Start()
     {
 

@@ -10,6 +10,7 @@ public class BuildingSelectorUIManager : MonoBehaviour
     public GameObject BuildingPadUi;
     public Animator UiAnimation;
 
+    private clickPad0 built;
 
 
     void Start()
@@ -22,6 +23,8 @@ public class BuildingSelectorUIManager : MonoBehaviour
 
     public void BuildBarracks()
     {
+
+        
 
         pass.selectedBuilding("Barracks");
         pass.BuildBuilding();

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4625427351490656330}
   m_Layer: 0
   m_Name: R2 Spawn Calibrator
-  m_TagString: Untagged
+  m_TagString: Reactor1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2685790710475617242}
   - component: {fileID: 1254370611906705552}
   - component: {fileID: 7465162046427937868}
+  - component: {fileID: 5768970946943325977}
   m_Layer: 0
   m_Name: R2
   m_TagString: Untagged
@@ -113,3 +114,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5768970946943325977
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9035743860972141306}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.702377, y: 6.7023754, z: 3.217038}
+  m_Center: {x: -0.10795879, y: 1.146739, z: -0.6085192}

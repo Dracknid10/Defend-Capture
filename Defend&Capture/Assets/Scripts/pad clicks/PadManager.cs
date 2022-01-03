@@ -8,7 +8,12 @@ public class PadManager : MonoBehaviour
 
     public GameObject BarracksLVL1;
     public GameObject SupplyPadLVL1;
+    public GameObject ReactorLVL1;
+    public GameObject VehicleDepoLVL1;
+    public GameObject AirPadLVL1;
 
+    private clickPad0 built;
+    
 
 
     public string BuildingToBuild;
@@ -25,7 +30,7 @@ public class PadManager : MonoBehaviour
 
 
         
-       
+
 
 
 
@@ -65,6 +70,7 @@ public class PadManager : MonoBehaviour
         return BuildingToBuild;
     }
 
+  
 
     public void BuildBuilding()
     {
@@ -73,38 +79,97 @@ public class PadManager : MonoBehaviour
 
         spawnPos = SelectedPad.transform.GetChild(0).gameObject.transform.position;
 
+        built = SelectedPad.GetComponent<clickPad0>();
 
 
-        if (BuildingToBuild == "Barracks")
+        if (built.builtUpon == false)
         {
 
-            if (SelectedPad != null)
+
+
+
+            if (BuildingToBuild == "Barracks")
             {
 
-                GameObject Building = (GameObject)Instantiate(BarracksLVL1);
-                Building.transform.position = spawnPos;
+                if (SelectedPad != null)
+                {
+
+                    GameObject Building = (GameObject)Instantiate(BarracksLVL1);
+                    Building.transform.position = spawnPos;
+
+                    built.builtUpon = true;
+
+                }
+
 
             }
 
 
-        }
-
-
-        if (BuildingToBuild == "Supply Pad")
-        {
-
-            if (SelectedPad != null)
+            if (BuildingToBuild == "Supply Pad")
             {
 
-                GameObject Building = (GameObject)Instantiate(SupplyPadLVL1);
-                Building.transform.position = spawnPos;
+                if (SelectedPad != null)
+                {
+
+                    GameObject Building = (GameObject)Instantiate(SupplyPadLVL1);
+                    Building.transform.position = spawnPos;
+
+                    built.builtUpon = true;
+
+                }
+
 
             }
 
 
+            if (BuildingToBuild == "Reactor")
+            {
+
+                if (SelectedPad != null)
+                {
+
+                    GameObject Building = (GameObject)Instantiate(ReactorLVL1);
+                    Building.transform.position = spawnPos;
+
+                    built.builtUpon = true;
+
+                }
+
+
+            }
+
+            if (BuildingToBuild == "Vehicle Depo")
+            {
+
+                if (SelectedPad != null)
+                {
+
+                    GameObject Building = (GameObject)Instantiate(VehicleDepoLVL1);
+                    Building.transform.position = spawnPos;
+
+                    built.builtUpon = true;
+
+                }
+
+
+            }
+
+            if (BuildingToBuild == "Air Pad")
+            {
+
+                if (SelectedPad != null)
+                {
+
+                    GameObject Building = (GameObject)Instantiate(AirPadLVL1);
+                    Building.transform.position = spawnPos;
+
+                    built.builtUpon = true;
+
+                }
+
+
+            }
         }
-
-
 
     }
 
