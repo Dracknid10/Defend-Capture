@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
-public class HoverOverBuildingText : MonoBehaviour, 
+public class HoverOverBuildingText : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
