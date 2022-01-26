@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - AirPad1
+  - Barracks1
+  - Reactor1
+  - SupplyPad1
+  - VehicleDepo1
   layers:
   - Default
   - TransparentFX
