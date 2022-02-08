@@ -9,6 +9,8 @@ TagManager:
   - Reactor1
   - SupplyPad1
   - VehicleDepo1
+  - Soilder
+  - GameManager
   layers:
   - Default
   - TransparentFX
