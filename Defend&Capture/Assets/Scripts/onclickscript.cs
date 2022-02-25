@@ -16,11 +16,6 @@ public class onclickscript : MonoBehaviour
 
         parentarray = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
 
-
-
-
-
-
     }
 
     void OnMouseDown()

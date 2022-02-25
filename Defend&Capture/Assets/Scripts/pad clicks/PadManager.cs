@@ -59,9 +59,14 @@ public class PadManager : MonoBehaviour
         return BuildingToBuild;
     }
 
-  
+  public void BuildBuilding()
+    {
 
-    public void BuildBuilding()
+        StartCoroutine(nestBuildBuilding());
+
+    }
+
+    IEnumerator nestBuildBuilding()
     {
 
 
@@ -83,10 +88,12 @@ public class PadManager : MonoBehaviour
                 if (SelectedPad != null)
                 {
 
+                    built.builtUpon = true;
+                    yield return new WaitForSeconds(5);
                     GameObject Building = (GameObject)Instantiate(BarracksLVL1);
                     Building.transform.position = spawnPos;
 
-                    built.builtUpon = true;
+                   
 
                 }
 
@@ -100,10 +107,12 @@ public class PadManager : MonoBehaviour
                 if (SelectedPad != null)
                 {
 
+                    built.builtUpon = true;
+                    yield return new WaitForSeconds(5);
                     GameObject Building = (GameObject)Instantiate(SupplyPadLVL1);
                     Building.transform.position = spawnPos;
 
-                    built.builtUpon = true;
+                    
 
                 }
 
@@ -117,10 +126,12 @@ public class PadManager : MonoBehaviour
                 if (SelectedPad != null)
                 {
 
+                    built.builtUpon = true;
+                    yield return new WaitForSeconds(5);
                     GameObject Building = (GameObject)Instantiate(ReactorLVL1);
                     Building.transform.position = spawnPos;
 
-                    built.builtUpon = true;
+                  
 
                 }
 
@@ -133,10 +144,11 @@ public class PadManager : MonoBehaviour
                 if (SelectedPad != null)
                 {
 
+                    built.builtUpon = true;
+                    yield return new WaitForSeconds(5);
                     GameObject Building = (GameObject)Instantiate(VehicleDepoLVL1);
                     Building.transform.position = spawnPos;
 
-                    built.builtUpon = true;
 
                 }
 
@@ -149,16 +161,20 @@ public class PadManager : MonoBehaviour
                 if (SelectedPad != null)
                 {
 
+                    built.builtUpon = true;
+                    yield return new WaitForSeconds(5);
                     GameObject Building = (GameObject)Instantiate(AirPadLVL1);
                     Building.transform.position = spawnPos;
 
-                    built.builtUpon = true;
+              
 
                 }
 
 
             }
         }
+
+        yield return new WaitForSeconds(0);
 
     }
 

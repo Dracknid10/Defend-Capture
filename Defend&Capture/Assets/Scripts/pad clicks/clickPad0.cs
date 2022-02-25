@@ -27,13 +27,19 @@ public class clickPad0 : MonoBehaviour
     void OnMouseDown()
     {
 
-        pass.selectedpad(gameObject);
+        if (UiAnimation.GetBool("Ui On") == false)
+        {
+            pass.selectedpad(gameObject);
+        }
 
-       
+
         UiAnimation.SetBool("Ui true", true);
         UiAnimation.SetBool("Ui Off", false);
         UiAnimation.SetBool("Ui On", true);
 
+      
+
+        
 
 
 
