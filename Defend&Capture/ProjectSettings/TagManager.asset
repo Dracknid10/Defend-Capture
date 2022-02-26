@@ -11,6 +11,7 @@ TagManager:
   - VehicleDepo1
   - Soilder
   - GameManager
+  - SupplyPad2
   layers:
   - Default
   - TransparentFX
