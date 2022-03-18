@@ -6,11 +6,11 @@ public class PadManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject BarracksLVL1;
-    public GameObject SupplyPadLVL1;
-    public GameObject ReactorLVL1;
-    public GameObject VehicleDepoLVL1;
-    public GameObject AirPadLVL1;
+    //public GameObject BarracksLVL1;
+    //public GameObject SupplyPadLVL1;
+    //public GameObject ReactorLVL1;
+    //public GameObject VehicleDepoLVL1;
+    //public GameObject AirPadLVL1;
 
     private clickPad0 built;
     
@@ -20,10 +20,15 @@ public class PadManager : MonoBehaviour
 
     [SerializeField] private GameObject SelectedPad;
 
-    private Vector3 spawnPos;
+    public Vector3 spawnPos;
 
-    
 
+    private statManager manager;
+
+    public void Start()
+    {
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -59,12 +64,12 @@ public class PadManager : MonoBehaviour
         return BuildingToBuild;
     }
 
-  public void BuildBuilding()
-    {
+     public void BuildBuilding()
+     {
 
-        StartCoroutine(nestBuildBuilding());
+            StartCoroutine(nestBuildBuilding());
 
-    }
+     }
 
     IEnumerator nestBuildBuilding()
     {
@@ -79,104 +84,96 @@ public class PadManager : MonoBehaviour
         if (built.builtUpon == false)
         {
 
-
-
-
-            if (BuildingToBuild == "Barracks")
+            if (manager.Supplies >= 500)
             {
 
-                if (SelectedPad != null)
+                if (BuildingToBuild == "Barracks")
                 {
 
-                    built.builtUpon = true;
-                    yield return new WaitForSeconds(5);
-                    GameObject Building = (GameObject)Instantiate(BarracksLVL1);
-                    Building.transform.position = spawnPos;
+                    if (SelectedPad != null)
+                    {
 
-                   
+                        built.BuildBarracksNest();
+
+                    }
 
                 }
+            }
 
+            if (manager.Supplies >= 150)
+            {
+
+                if (BuildingToBuild == "Supply Pad")
+                {
+
+                    if (SelectedPad != null)
+                    {
+
+                        built.BuildSupplyPadNest();
+
+                    }
+
+
+                }
 
             }
 
-
-            if (BuildingToBuild == "Supply Pad")
+            if (manager.Supplies >= 1500)
             {
 
-                if (SelectedPad != null)
+                if (BuildingToBuild == "Reactor")
                 {
 
-                    built.builtUpon = true;
-                    yield return new WaitForSeconds(5);
-                    GameObject Building = (GameObject)Instantiate(SupplyPadLVL1);
-                    Building.transform.position = spawnPos;
+                    if (SelectedPad != null)
+                    {
 
-                    
+                        built.BuildReactornest();
 
+                    }
                 }
-
-
             }
 
-
-            if (BuildingToBuild == "Reactor")
+            if (manager.reactorLvl >= 1)
             {
 
-                if (SelectedPad != null)
+                if (manager.Supplies >= 700)
                 {
 
-                    built.builtUpon = true;
-                    yield return new WaitForSeconds(5);
-                    GameObject Building = (GameObject)Instantiate(ReactorLVL1);
-                    Building.transform.position = spawnPos;
 
-                  
+                    if (BuildingToBuild == "Vehicle Depo")
+                    {
 
-                }
+                        if (SelectedPad != null)
+                        {
 
-
-            }
-
-            if (BuildingToBuild == "Vehicle Depo")
-            {
-
-                if (SelectedPad != null)
-                {
-
-                    built.builtUpon = true;
-                    yield return new WaitForSeconds(5);
-                    GameObject Building = (GameObject)Instantiate(VehicleDepoLVL1);
-                    Building.transform.position = spawnPos;
+                            built.BuildVechDeponest();
 
 
-                }
+                        }
 
 
-            }
+                    }
 
-            if (BuildingToBuild == "Air Pad")
-            {
+                    if (BuildingToBuild == "Air Pad")
+                    {
+                        if (SelectedPad != null)
+                        {
+                           built.BuildAirPadNest();
 
-                if (SelectedPad != null)
-                {
+                        }
 
-                    built.builtUpon = true;
-                    yield return new WaitForSeconds(5);
-                    GameObject Building = (GameObject)Instantiate(AirPadLVL1);
-                    Building.transform.position = spawnPos;
-
-              
+                    }
 
                 }
-
-
+    
             }
         }
 
         yield return new WaitForSeconds(0);
 
     }
+
+
 
 
 }

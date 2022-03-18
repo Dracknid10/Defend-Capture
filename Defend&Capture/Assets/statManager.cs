@@ -7,11 +7,16 @@ public class statManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public int reactorLvl;
+    public int reactorLvl = 0;
     public int Supplies;
     public int MaxPop;
     public int CurrentPop;
+
+
     
+    public Text UIsupplies;
+    public Text UIPopualtion;
+    public Text UIReactorLVL;
 
 
 
@@ -19,12 +24,18 @@ public class statManager : MonoBehaviour
     {
         MaxPop = 50;
         CurrentPop = 0;
+        Supplies = 150;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        UIsupplies.text = Supplies.ToString();
+        UIReactorLVL.text = reactorLvl.ToString();
+        UIPopualtion.text = CurrentPop.ToString();
+
+
     }
 
 
@@ -35,5 +46,12 @@ public class statManager : MonoBehaviour
 
 
         return 0;
+    }
+
+    public void addreactorlvl()
+    {
+
+        reactorLvl = reactorLvl + 1;
+
     }
 }
