@@ -69,7 +69,7 @@ public class BuildingSelectorUIManager : MonoBehaviour
         pass.selectedBuilding("");
         pass.selectedpad(null);
 
-        UiAnimation.SetBool("Ui true", true);
+        
         UiAnimation.SetBool("Ui On", false);
         UiAnimation.SetBool("Ui Off", true);
 

@@ -15,7 +15,11 @@ public class arrayofSelectedTroops : MonoBehaviour
     NavMeshAgent agent;
     public Camera cam;
 
+    void Start()
+    {
+       
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -24,7 +28,7 @@ public class arrayofSelectedTroops : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
 
-            Debug.Log("hit");
+           
 
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -40,18 +44,15 @@ public class arrayofSelectedTroops : MonoBehaviour
 
                     agent.SetDestination(hit.point);
 
+                    SelectedTroops[i].GetComponent<onclickscript>().resetPriority = true;
 
 
 
                 }
             }
 
-       
-
-
         }
 
-        
 
 
 

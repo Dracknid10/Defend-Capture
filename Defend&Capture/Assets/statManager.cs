@@ -24,7 +24,7 @@ public class statManager : MonoBehaviour
     {
         MaxPop = 50;
         CurrentPop = 0;
-        Supplies = 150;
+        Supplies = 7000;
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class statManager : MonoBehaviour
 
         UIsupplies.text = Supplies.ToString();
         UIReactorLVL.text = reactorLvl.ToString();
-        UIPopualtion.text = CurrentPop.ToString();
+        UIPopualtion.text = CurrentPop.ToString() + "/50";
 
 
     }

@@ -12,6 +12,9 @@ TagManager:
   - Soilder
   - GameManager
   - SupplyPad2
+  - Barracks Options
+  - Rallypoint
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

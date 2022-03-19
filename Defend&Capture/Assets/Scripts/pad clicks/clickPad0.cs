@@ -10,6 +10,9 @@ public class clickPad0 : MonoBehaviour
 
     public GameObject BuildingPadUi;
     public Animator UiAnimation;
+
+    
+
     public Vector3 spawnPos;
     public clickPad0 built;
     private statManager manager;
