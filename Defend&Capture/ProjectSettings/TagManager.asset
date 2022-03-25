@@ -15,6 +15,7 @@ TagManager:
   - Barracks Options
   - Rallypoint
   - SpawnPoint
+  - EnemySoldier
   layers:
   - Default
   - TransparentFX

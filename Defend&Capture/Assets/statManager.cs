@@ -19,12 +19,18 @@ public class statManager : MonoBehaviour
     public Text UIReactorLVL;
 
 
+    public List<GameObject> Enemies = new List<GameObject>();
+
 
     void Start()
     {
         MaxPop = 50;
         CurrentPop = 0;
         Supplies = 7000;
+
+
+
+
     }
 
     // Update is called once per frame

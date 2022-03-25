@@ -26,6 +26,8 @@ public class Barracks1 : MonoBehaviour
 
         spawnLoc = GameObject.FindWithTag("SpawnPoint").transform.position;
 
+       
+
     }
 
     // Update is called once per frame

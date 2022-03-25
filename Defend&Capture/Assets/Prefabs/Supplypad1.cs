@@ -37,15 +37,8 @@ public class Supplypad1 : MonoBehaviour
     IEnumerator addSupplies()
     {
 
-        addgap = true;
-
-        if (addgap)
-        {
-            manager.addsupplies(20);
-        }
-
-
-        
+        addgap = true;   
+        manager.addsupplies(20);
         yield return new WaitForSeconds(1);
         addgap = false;
 

@@ -11,10 +11,13 @@ public class onclickscript : MonoBehaviour
     GameObject GameManager;
 
 
+    private statManager manager;
+
+
     private Transform goal;
 
     public int selected = 0;
-
+    public bool SelectedAgent;
 
     NavMeshAgent agent;
 
@@ -25,7 +28,8 @@ public class onclickscript : MonoBehaviour
     void Start()
     {
 
-       
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
+
 
         goal = GameObject.FindGameObjectWithTag("Rallypoint").transform;
 
@@ -50,21 +54,22 @@ public class onclickscript : MonoBehaviour
             resetPriority = false;
 
         }
-        //while (resetPriority)
-        //{
-        //    StartCoroutine(priorityRandomiser());
-        //}
+
+        
+        if (resetPriority)
+        {
+            StartCoroutine(priorityRandomiser());
+        }
 
     }
 
     IEnumerator priorityRandomiser()
     {
-        if (resetPriority)
-        {
-            yield return new WaitForSeconds(3);
-            agent.avoidancePriority = Random.Range(10, 60);
-            yield return new WaitForSeconds(3);
-        }
+
+        resetPriority = false;
+        agent.avoidancePriority = Random.Range(10, 60);
+        yield return new WaitForSeconds(5);
+        resetPriority = true;
 
     }
 
@@ -74,6 +79,16 @@ public class onclickscript : MonoBehaviour
     void OnMouseDown()
     {
 
+        SelectOrDeselect();
+
+
+
+
+    }
+
+    public void SelectOrDeselect()
+    {
+
         if (gameObject.tag == "Soilder")
         {
 
@@ -81,6 +96,7 @@ public class onclickscript : MonoBehaviour
             {
                 parentarray.addtroop(gameObject);
                 gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                SelectedAgent = true;
 
             }
 
@@ -88,6 +104,7 @@ public class onclickscript : MonoBehaviour
             {
                 parentarray.removetroop(gameObject);
                 gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                SelectedAgent = false;
 
             }
 
@@ -95,7 +112,7 @@ public class onclickscript : MonoBehaviour
             selected = selected + 1;
 
         }
- 
+
 
 
     }
