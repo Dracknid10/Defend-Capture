@@ -13,7 +13,7 @@ public class SphereSeletionBehaviour : MonoBehaviour
     NavMeshAgent agent;
     public Camera cam;
 
-   
+    private arrayofSelectedTroops parentarray;
 
 
     void Start()
@@ -21,6 +21,7 @@ public class SphereSeletionBehaviour : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        parentarray = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
 
     }
 
@@ -32,6 +33,12 @@ public class SphereSeletionBehaviour : MonoBehaviour
 
         if (Input.GetKey("left shift"))
         {
+
+            
+            parentarray.clearSelection();
+            
+
+          
 
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
@@ -51,4 +58,10 @@ public class SphereSeletionBehaviour : MonoBehaviour
 
       
     }
-}
+
+
+
+
+
+
+    }

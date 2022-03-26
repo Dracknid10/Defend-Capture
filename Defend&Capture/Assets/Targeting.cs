@@ -16,6 +16,7 @@ public class Targeting : MonoBehaviour
     public bool targetLimiter;
     public GameObject closestTarget;
     private float Range = 100;
+    public GameObject selector;
 
     public GameObject RELOCATE0;
     public GameObject RELOCATE1;
@@ -41,6 +42,8 @@ public class Targeting : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
 
+        selector = GameObject.FindGameObjectWithTag("Selector");
+
     }
 
     // Update is called once per frame
@@ -64,8 +67,11 @@ public class Targeting : MonoBehaviour
           
             if (Physics.Raycast(transform.position, gameObject.transform.forward, out hit, Range))
             {
+                if (hit.transform.gameObject.tag == "Selector")
+                {
 
-                if (hit.transform.gameObject != closestTarget)
+                }
+                else if (hit.transform.gameObject != closestTarget )
                 {
 
 

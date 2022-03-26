@@ -79,7 +79,29 @@ public class arrayofSelectedTroops : MonoBehaviour
     }
 
 
-    
+    public void clearSelection()
+    {
+
+
+        if (SelectedTroops.Count != 0)
+        {
+
+            int tempsize = SelectedTroops.Count;
+
+
+            for (int i = 0; i < tempsize; i++)
+            {
+
+                SelectedTroops[0].GetComponent<onclickscript>().SelectOrDeselect();
+                tempsize = tempsize - 1;
+
+            }
+
+          
+        }
+    }
+
+      
 
 
 

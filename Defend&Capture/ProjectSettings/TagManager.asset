@@ -16,6 +16,7 @@ TagManager:
   - Rallypoint
   - SpawnPoint
   - EnemySoldier
+  - Selector
   layers:
   - Default
   - TransparentFX
