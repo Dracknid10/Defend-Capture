@@ -28,6 +28,9 @@ public class Targeting : MonoBehaviour
     public Vector3 RELOCATE2trans;
     public Vector3 RELOCATE3trans;
 
+    public bool cansee;
+
+
     public List<Vector3> relocatetargets = new List<Vector3>();
 
 
@@ -53,52 +56,87 @@ public class Targeting : MonoBehaviour
         if (targetLimiter && manager.Enemies.Count() != 0)
         {
 
-         
+
             StartCoroutine(getTargets());
-           
+
 
 
         }
         if (closestTarget != null)
         {
-            transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
 
-            RaycastHit hit;
-          
-            if (Physics.Raycast(transform.position, gameObject.transform.forward, out hit, Range))
+            Vector3 raydirection = closestTarget.transform.position - gameObject.transform.position;
+
+
+
+            RaycastHit hitEnemey;
+
+            RaycastHit hitDirection;
+
+
+
+            Debug.DrawRay(transform.position, raydirection, Color.yellow, 1, true);
+
+            if (Physics.Raycast(transform.position, raydirection, out hitEnemey, Range))
             {
-                if (hit.transform.gameObject.tag == "Selector")
+                
+                if (hitEnemey.transform.gameObject.tag == "EnemySoldier")
                 {
-
+                    
+                    transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+                    cansee = true;
                 }
-                else if (hit.transform.gameObject != closestTarget )
-                {
+                else if (hitEnemey.transform.gameObject.tag != "EnemySoldier") { cansee = false; }
 
 
-
-                    relocatetargets.Clear();
-
-                    RELOCATE0trans = RELOCATE0.transform.position;
-                    RELOCATE1trans = RELOCATE1.transform.position;
-                    RELOCATE2trans = RELOCATE2.transform.position;
-                    RELOCATE3trans = RELOCATE3.transform.position;
-
-                    relocatetargets.Add(RELOCATE0trans);
-                    relocatetargets.Add(RELOCATE1trans);
-                    relocatetargets.Add(RELOCATE2trans);
-                    relocatetargets.Add(RELOCATE3trans);
-
-                    agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
-
-
-                }
             }
 
 
 
+
+
+
+
+            Debug.DrawRay(transform.position, gameObject.transform.forward*Range, Color.green, 1, true);
+
+            if (Physics.Raycast(transform.position, gameObject.transform.forward, out hitDirection, Range))
+            {
+
+
+                if (hitDirection.transform.gameObject.tag == "Soilder")
+                {
+                    if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
+                    {
+                        relocatetargets.Clear();
+
+                        RELOCATE0trans = RELOCATE0.transform.position;
+                        RELOCATE1trans = RELOCATE1.transform.position;
+                        RELOCATE2trans = RELOCATE2.transform.position;
+                        RELOCATE3trans = RELOCATE3.transform.position;
+
+                        relocatetargets.Add(RELOCATE0trans);
+                        relocatetargets.Add(RELOCATE1trans);
+                        relocatetargets.Add(RELOCATE2trans);
+                        relocatetargets.Add(RELOCATE3trans);
+
+                        agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
+
+                    }
+
+
+
+
+                }
+
+
+            }
+
+
+          
+
+
+
         }
-
-
 
     }
 

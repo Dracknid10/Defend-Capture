@@ -42,6 +42,8 @@ public class onclickscript : MonoBehaviour
 
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
 
+        parentarray.AllTroops.Add(gameObject);
+
     }
 
     void Update()
@@ -117,6 +119,35 @@ public class onclickscript : MonoBehaviour
 
     }
 
+    public void MassClearDeselect()
+    {
 
+       
+           
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            SelectedAgent = false;
+            selected = 0;
+
+        
+
+
+    }
+    
+
+
+        private void OnTriggerEnter(Collider other)
+    {
+
+        Debug.Log(other.tag);
+
+        if (other.tag == "Selector")
+        {
+
+            
+            SelectOrDeselect();
+            
+
+        }
+    }
 
 }

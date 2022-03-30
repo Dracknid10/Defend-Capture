@@ -22,6 +22,8 @@ public class colisionForSelection : MonoBehaviour
 
         Debug.Log(collision);
 
+        collision.transform.gameObject.GetComponent<onclickscript>().SelectOrDeselect();
+
     }
 
 }

@@ -10,6 +10,7 @@ public class arrayofSelectedTroops : MonoBehaviour
 
 
     public List<GameObject> SelectedTroops = new List<GameObject>();
+    public List<GameObject> AllTroops = new List<GameObject>();
 
     [SerializeField]
     NavMeshAgent agent;
@@ -79,6 +80,10 @@ public class arrayofSelectedTroops : MonoBehaviour
     }
 
 
+
+
+
+
     public void clearSelection()
     {
 
@@ -86,17 +91,18 @@ public class arrayofSelectedTroops : MonoBehaviour
         if (SelectedTroops.Count != 0)
         {
 
-            int tempsize = SelectedTroops.Count;
+           
 
 
-            for (int i = 0; i < tempsize; i++)
+            for (int i = 0; i < SelectedTroops.Count; i++)
             {
 
-                SelectedTroops[0].GetComponent<onclickscript>().SelectOrDeselect();
-                tempsize = tempsize - 1;
+                SelectedTroops[i].GetComponent<onclickscript>().MassClearDeselect();
+                
 
             }
 
+            SelectedTroops.Clear();
           
         }
     }

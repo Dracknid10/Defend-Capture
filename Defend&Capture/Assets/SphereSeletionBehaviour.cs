@@ -29,16 +29,18 @@ public class SphereSeletionBehaviour : MonoBehaviour
     void Update()
     {
 
-      
+        if (Input.GetKeyDown("left shift"))
+        {
+
+            parentarray.clearSelection();
+
+        }
 
         if (Input.GetKey("left shift"))
         {
 
             
-            parentarray.clearSelection();
-            
 
-          
 
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
