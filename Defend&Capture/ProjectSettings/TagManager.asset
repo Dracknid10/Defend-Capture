@@ -17,6 +17,12 @@ TagManager:
   - SpawnPoint
   - EnemySoldier
   - Selector
+  - bullet
+  - BarracksButton
+  - SupplyPadButton
+  - ReactorButton
+  - VDbutton
+  - APbutton
   layers:
   - Default
   - TransparentFX

@@ -487,6 +487,8 @@ MonoBehaviour:
   RELOCATE2trans: {x: 0, y: 0, z: 0}
   RELOCATE3trans: {x: 0, y: 0, z: 0}
   cansee: 0
+  Bullet: {fileID: 1841102839908160746, guid: 86a12be6d8d5d4b418b70754886c1c1b, type: 3}
+  FirePoint: {fileID: 8275424729084353049}
   relocatetargets: []
 --- !u!1 &733087005770989783
 GameObject:
@@ -602,6 +604,7 @@ Transform:
   - {fileID: 733087004878410930}
   - {fileID: 733087006044466447}
   - {fileID: 733087004097740131}
+  - {fileID: 6475489987938000886}
   m_Father: {fileID: 733087005195959769}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 1348.856}
@@ -1211,3 +1214,33 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 100
+--- !u!1 &8275424729084353049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6475489987938000886}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6475489987938000886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8275424729084353049}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 3.18, y: 0.26, z: 0.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 733087005919864084}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}

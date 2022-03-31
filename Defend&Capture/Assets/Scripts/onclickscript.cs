@@ -36,13 +36,15 @@ public class onclickscript : MonoBehaviour
         parentarray = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
 
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = goal.position;
+        
 
         agent.avoidancePriority = Random.Range(10, 60);
 
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
 
         parentarray.AllTroops.Add(gameObject);
+
+        agent.destination = goal.position;
 
     }
 
@@ -138,7 +140,7 @@ public class onclickscript : MonoBehaviour
         private void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log(other.tag);
+       
 
         if (other.tag == "Selector")
         {

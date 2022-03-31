@@ -30,6 +30,10 @@ public class Targeting : MonoBehaviour
 
     public bool cansee;
 
+    public GameObject Bullet;
+    public GameObject FirePoint;
+    private bool reload;
+    
 
     public List<Vector3> relocatetargets = new List<Vector3>();
 
@@ -46,6 +50,8 @@ public class Targeting : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         selector = GameObject.FindGameObjectWithTag("Selector");
+
+        reload = false;
 
     }
 
@@ -85,6 +91,14 @@ public class Targeting : MonoBehaviour
                     
                     transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
                     cansee = true;
+
+                    if (reload == false)
+                    {
+                        StartCoroutine(fireBullet());
+                    }
+                    
+                  
+
                 }
                 else if (hitEnemey.transform.gameObject.tag != "EnemySoldier") { cansee = false; }
 
@@ -141,7 +155,24 @@ public class Targeting : MonoBehaviour
     }
 
 
-    IEnumerator getTargets()
+    IEnumerator fireBullet()
+    {
+        reload = true;
+
+
+        Instantiate (Bullet, FirePoint.transform.position, FirePoint.transform.rotation);
+
+
+        yield return new WaitForSeconds(1);
+
+        reload = false;
+    }
+
+
+
+
+
+        IEnumerator getTargets()
     {
         targetLimiter = false;
 

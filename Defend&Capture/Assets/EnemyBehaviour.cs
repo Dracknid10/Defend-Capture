@@ -21,4 +21,21 @@ public class EnemyBehaviour : MonoBehaviour
     {
         
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+
+
+        Debug.Log(other);
+
+        if (other.tag == "bullet")
+        {
+            Destroy(other.transform.gameObject);
+        }
+        
+
+
+    }
 }
