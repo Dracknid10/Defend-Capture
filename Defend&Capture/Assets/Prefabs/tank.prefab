@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736267699793911763}
   m_LocalRotation: {x: -0.000000115202326, y: -0.7071068, z: -0.7071068, w: 0.000000115202326}
-  m_LocalPosition: {x: -0.05, y: 1.224, z: -0.05}
+  m_LocalPosition: {x: -0.05, y: -0.275, z: -0.05}
   m_LocalScale: {x: 0.13695942, y: 0.13794845, z: 0.2}
   m_Children:
   - {fileID: 1736267699673233559}
@@ -795,7 +795,7 @@ MonoBehaviour:
   selector: {fileID: 0}
   Turret: {fileID: 0}
   cansee: 0
-  Bullet: {fileID: 1841102839908160746, guid: 86a12be6d8d5d4b418b70754886c1c1b, type: 3}
+  Bullet: {fileID: 863923329645480517, guid: 814fce8aa882ae6488de744dd86bfcce, type: 3}
   FirePoint: {fileID: 1736267701487166582}
   relocatetargets: []
 --- !u!1 &7557437280877110603

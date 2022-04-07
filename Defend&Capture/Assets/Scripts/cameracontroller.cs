@@ -7,7 +7,7 @@ public class cameracontroller : MonoBehaviour
    
     public float speedZ = 0f;
     public float speedX = 0f;
-    public float speedY = 0f;
+
 
     public float panBorderThickness = 10f;
 
@@ -15,49 +15,9 @@ public class cameracontroller : MonoBehaviour
     void Update()
     {
 
-        transform.Translate(speedX * Time.deltaTime, speedY *Time.deltaTime , speedZ * Time.deltaTime, Space.Self);
+        transform.Translate(speedX * Time.deltaTime, 0 , speedZ * Time.deltaTime, Space.Self);
 
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-
-            speedY = 100f;
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-
-            speedY = 0f;
-
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-
-            speedY = -100f;
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.C))
-        {
-
-            speedY = 0f;
-
-        }
-
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-
-        //    speedY = 100f;
-
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.Q))
-        //{
-
-        //    speedY = 0f;
-
-        //}
 
 
         if (Input.GetKeyDown(KeyCode.W))

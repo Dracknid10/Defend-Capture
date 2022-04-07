@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 6076984789244359361}
   - component: {fileID: 2559892778651214854}
   - component: {fileID: 8234114820588654174}
+  - component: {fileID: 6684176591026104314}
   - component: {fileID: 6619506268069845833}
   m_Layer: 0
   m_Name: V2
@@ -118,6 +119,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6684176591026104314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528246063645912308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c9ca3d7ae0f494ab42743a405bd6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VehicleUi: {fileID: 0}
+  UiAnimation: {fileID: 0}
+  Soilder: {fileID: 6323724821838071701, guid: 7ca0c045b77cba74c9538d5827993aa5, type: 3}
+  spawnLoc: {x: 0, y: 0, z: 0}
 --- !u!65 &6619506268069845833
 BoxCollider:
   m_ObjectHideFlags: 0

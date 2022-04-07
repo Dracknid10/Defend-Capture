@@ -72,7 +72,7 @@ public class onclickscript : MonoBehaviour
 
         resetPriority = false;
         agent.avoidancePriority = Random.Range(10, 60);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(8);
         resetPriority = true;
 
     }

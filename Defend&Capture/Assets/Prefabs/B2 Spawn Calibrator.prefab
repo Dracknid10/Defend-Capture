@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BarracksUI: {fileID: 0}
   UiAnimation: {fileID: 0}
-  Soilder: {fileID: 0}
+  Soilder: {fileID: 733087005195959773, guid: 86a7569cdf4624641995424d717d763f, type: 3}
   spawnLoc: {x: 0, y: 0, z: 0}
 --- !u!1 &7278359028696298930
 GameObject:
@@ -124,7 +124,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7278359028696298931}
-  - component: {fileID: 5506692369029161698}
   m_Layer: 0
   m_Name: B2 Spawn Calibrator
   m_TagString: Barracks1
@@ -147,19 +146,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5506692369029161698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7278359028696298930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdea29d804685f64191e092130d3fc7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BarracksUI: {fileID: 0}
-  UiAnimation: {fileID: 0}
-  Soilder: {fileID: 733087005195959773, guid: 86a7569cdf4624641995424d717d763f, type: 3}
-  spawnLoc: {x: 0, y: 0, z: 0}
