@@ -93,7 +93,7 @@ public class onclickscript : MonoBehaviour
     public void SelectOrDeselect()
     {
 
-        if (gameObject.tag == "Soilder")
+        if (gameObject.tag == "Soilder"|| gameObject.tag == "Tank")
         {
 
             if (selected % 2 == 0)

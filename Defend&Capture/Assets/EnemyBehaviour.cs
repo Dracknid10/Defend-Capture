@@ -28,7 +28,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 
 
-        Debug.Log(other);
+       
 
         if (other.tag == "bullet")
         {

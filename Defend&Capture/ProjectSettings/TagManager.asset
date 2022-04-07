@@ -23,6 +23,7 @@ TagManager:
   - ReactorButton
   - VDbutton
   - APbutton
+  - Tank
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - selectioncircle
   - 
   - 
   - 

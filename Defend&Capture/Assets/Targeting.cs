@@ -28,6 +28,8 @@ public class Targeting : MonoBehaviour
     public Vector3 RELOCATE2trans;
     public Vector3 RELOCATE3trans;
 
+    private Vector3 lookingPosition;
+
     public bool cansee;
 
     public GameObject Bullet;
@@ -53,6 +55,9 @@ public class Targeting : MonoBehaviour
 
         reload = false;
 
+ 
+
+       
     }
 
     // Update is called once per frame
@@ -79,11 +84,11 @@ public class Targeting : MonoBehaviour
 
             RaycastHit hitDirection;
 
+            lookingPosition = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
 
+            Debug.DrawRay(lookingPosition, raydirection, Color.yellow, 1, true);
 
-            Debug.DrawRay(transform.position, raydirection, Color.yellow, 1, true);
-
-            if (Physics.Raycast(transform.position, raydirection, out hitEnemey, Range))
+            if (Physics.Raycast(lookingPosition, raydirection, out hitEnemey, Range))
             {
                 
                 if (hitEnemey.transform.gameObject.tag == "EnemySoldier")
@@ -109,37 +114,34 @@ public class Targeting : MonoBehaviour
 
 
 
+            lookingPosition = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
 
+            Debug.DrawRay(lookingPosition, gameObject.transform.forward*Range, Color.green, 1, true);
 
-            Debug.DrawRay(transform.position, gameObject.transform.forward*Range, Color.green, 1, true);
-
-            if (Physics.Raycast(transform.position, gameObject.transform.forward, out hitDirection, Range))
+            if (Physics.Raycast(lookingPosition, gameObject.transform.forward, out hitDirection, Range))
             {
+               
 
 
                 if (hitDirection.transform.gameObject.tag == "Soilder")
                 {
+                
                     if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
                     {
-                        relocatetargets.Clear();
-
-                        RELOCATE0trans = RELOCATE0.transform.position;
-                        RELOCATE1trans = RELOCATE1.transform.position;
-                        RELOCATE2trans = RELOCATE2.transform.position;
-                        RELOCATE3trans = RELOCATE3.transform.position;
-
-                        relocatetargets.Add(RELOCATE0trans);
-                        relocatetargets.Add(RELOCATE1trans);
-                        relocatetargets.Add(RELOCATE2trans);
-                        relocatetargets.Add(RELOCATE3trans);
-
-                        agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
+                        rotateAngle();
 
                     }
+                }
 
 
+                if (hitDirection.transform.gameObject.tag == "Tank")
+                {
 
+                    if (hitDirection.transform.gameObject.GetComponent<TankTargeting>().cansee == true)
+                    {
+                        rotateAngle();
 
+                    }
                 }
 
 
@@ -154,6 +156,25 @@ public class Targeting : MonoBehaviour
 
     }
 
+    private void rotateAngle()
+    {
+        relocatetargets.Clear();
+
+        RELOCATE0trans = RELOCATE0.transform.position;
+        RELOCATE1trans = RELOCATE1.transform.position;
+        RELOCATE2trans = RELOCATE2.transform.position;
+        RELOCATE3trans = RELOCATE3.transform.position;
+
+        relocatetargets.Add(RELOCATE0trans);
+        relocatetargets.Add(RELOCATE1trans);
+        relocatetargets.Add(RELOCATE2trans);
+        relocatetargets.Add(RELOCATE3trans);
+
+        agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
+
+
+
+    }
 
     IEnumerator fireBullet()
     {
@@ -173,60 +194,60 @@ public class Targeting : MonoBehaviour
 
 
         IEnumerator getTargets()
-    {
-        targetLimiter = false;
-
-        EnemiesInRange.Clear();
-        closestTarget = null;
-
-
-        for (int i = 0; i < manager.Enemies.Count(); i++)
         {
-            float distance = Vector3.Distance(manager.Enemies[i].transform.position, gameObject.transform.position);
+            targetLimiter = false;
+
+            EnemiesInRange.Clear();
+            closestTarget = null;
+
+
+            for (int i = 0; i < manager.Enemies.Count(); i++)
+            {
+                float distance = Vector3.Distance(manager.Enemies[i].transform.position, gameObject.transform.position);
 
            
 
-            if (distance <= Range)
-            {
-                EnemiesInRange.Add(manager.Enemies[i]);
-            }
-
-
-        }
-
-        if (EnemiesInRange.Count() != 0)
-        {
-            GameObject Closest = EnemiesInRange[0];
-            float tempdistance = Vector3.Distance(manager.Enemies[0].transform.position, gameObject.transform.position);
-
-
-            for (int i = 0; i < EnemiesInRange.Count(); i++)
-            {
-
-                float distance = Vector3.Distance(manager.Enemies[i].transform.position, gameObject.transform.position);
-
-                if (tempdistance > distance)
+                if (distance <= Range)
                 {
-                    Closest = manager.Enemies[i];
-                    tempdistance = distance;
+                    EnemiesInRange.Add(manager.Enemies[i]);
                 }
 
 
-
             }
 
-            closestTarget = Closest;
+            if (EnemiesInRange.Count() != 0)
+            {
+                GameObject Closest = EnemiesInRange[0];
+                float tempdistance = Vector3.Distance(manager.Enemies[0].transform.position, gameObject.transform.position);
+
+
+                for (int i = 0; i < EnemiesInRange.Count(); i++)
+                {
+
+                    float distance = Vector3.Distance(manager.Enemies[i].transform.position, gameObject.transform.position);
+
+                    if (tempdistance > distance)
+                    {
+                        Closest = manager.Enemies[i];
+                        tempdistance = distance;
+                    }
+
+
+
+                }
+
+                closestTarget = Closest;
             
+            }
+
+       
+
+            yield return new WaitForSeconds(2);
+
+       
+            targetLimiter = true;
+
         }
-
-       
-
-        yield return new WaitForSeconds(2);
-
-       
-        targetLimiter = true;
-
-    }
 
 
 }
