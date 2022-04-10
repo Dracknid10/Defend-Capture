@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemyBehaviour : MonoBehaviour
 {
 
-    private float Health = 100;
+    private float Health;
     public Slider HealthBar;
 
 
@@ -18,6 +18,7 @@ public class EnemyBehaviour : MonoBehaviour
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
 
         manager.Enemies.Add(gameObject);
+        Health = 100f;
         HealthBar.maxValue = Health;
         HealthBar.value = Health;
 

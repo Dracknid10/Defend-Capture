@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class TankTargeting : MonoBehaviour
+
+public class HelicopterTargeting : MonoBehaviour
 {
     // Start is called before the first frame update
 
@@ -15,15 +16,17 @@ public class TankTargeting : MonoBehaviour
     public statManager manager;
     public bool targetLimiter;
     public GameObject closestTarget;
-    private float Range = 200;
+    private float Range = 140;
     public GameObject selector;
-    public GameObject Turret;
+
 
     public bool cansee;
 
     public GameObject Bullet;
     public GameObject FirePoint;
+    public GameObject FirePoint2;
     private bool reload;
+
 
 
 
@@ -43,7 +46,7 @@ public class TankTargeting : MonoBehaviour
 
         reload = false;
 
-        Turret = this.gameObject.transform.GetChild(1).gameObject;
+
 
     }
 
@@ -81,7 +84,15 @@ public class TankTargeting : MonoBehaviour
                 if (hitEnemey.transform.gameObject.tag == "EnemySoldier")
                 {
 
-                    Turret.transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+                    Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
+                    Vector3 direction2 = hitEnemey.transform.position - FirePoint2.transform.position;
+                    Quaternion rotation = Quaternion.LookRotation(direction);
+                    Quaternion rotation2 = Quaternion.LookRotation(direction2);
+
+                    FirePoint.transform.rotation = rotation;
+                    FirePoint2.transform.rotation = rotation2;
+
+
                     cansee = true;
 
                     if (reload == false)
@@ -102,8 +113,6 @@ public class TankTargeting : MonoBehaviour
 
 
 
-
-
         }
 
     }
@@ -115,6 +124,7 @@ public class TankTargeting : MonoBehaviour
 
 
         Instantiate(Bullet, FirePoint.transform.position, FirePoint.transform.rotation);
+        Instantiate(Bullet, FirePoint2.transform.position, FirePoint.transform.rotation);
 
 
         yield return new WaitForSeconds(1);

@@ -26,6 +26,7 @@ TagManager:
   - Tank
   - missile
   - VehicleUiOptions
+  - Heli
   layers:
   - Default
   - TransparentFX
