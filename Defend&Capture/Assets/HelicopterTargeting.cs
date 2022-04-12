@@ -16,7 +16,7 @@ public class HelicopterTargeting : MonoBehaviour
     public statManager manager;
     public bool targetLimiter;
     public GameObject closestTarget;
-    private float Range = 140;
+    private float Range = 100;
     public GameObject selector;
 
 

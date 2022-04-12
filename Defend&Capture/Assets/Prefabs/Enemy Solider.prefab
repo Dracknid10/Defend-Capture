@@ -494,6 +494,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 7749815661143265794}
   manager: {fileID: 0}
+  TargetingManager: {fileID: 0}
+  EnemiesInRange: []
+  relocatetargets: []
+  closestTarget: {fileID: 0}
+  targetLimiter: 0
+  cansee: 0
+  Bullet: {fileID: 1841102839908160746, guid: 86a12be6d8d5d4b418b70754886c1c1b, type: 3}
+  FirePoint: {fileID: 6887338527761240057}
+  RELOCATE0: {fileID: 6887338526791660110}
+  RELOCATE1: {fileID: 6887338526256146778}
+  RELOCATE2: {fileID: 6887338526094673797}
+  RELOCATE3: {fileID: 6887338526849365427}
+  RELOCATE0trans: {x: 0, y: 0, z: 0}
+  RELOCATE1trans: {x: 0, y: 0, z: 0}
+  RELOCATE2trans: {x: 0, y: 0, z: 0}
+  RELOCATE3trans: {x: 0, y: 0, z: 0}
 --- !u!54 &6176914870555495891
 Rigidbody:
   m_ObjectHideFlags: 0

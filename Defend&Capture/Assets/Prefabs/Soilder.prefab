@@ -381,6 +381,8 @@ GameObject:
   - component: {fileID: 733087005195959771}
   - component: {fileID: 733087005195959770}
   - component: {fileID: 737491861}
+  - component: {fileID: 1993571497}
+  - component: {fileID: 1993571498}
   m_Layer: 0
   m_Name: Soilder
   m_TagString: Soilder
@@ -439,11 +441,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733087005195959773}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8760452, y: 6.895508, z: 2.5845642}
-  m_Center: {x: 0.060504913, y: 3.2149353, z: -0.013870239}
+  m_Size: {x: 3.3643646, y: 6.895508, z: 2.5845642}
+  m_Center: {x: 0.2473526, y: 3.2149353, z: -0.013870239}
 --- !u!114 &733087005195959770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +492,37 @@ MonoBehaviour:
   Bullet: {fileID: 1841102839908160746, guid: 86a12be6d8d5d4b418b70754886c1c1b, type: 3}
   FirePoint: {fileID: 8275424729084353049}
   relocatetargets: []
+--- !u!114 &1993571497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733087005195959773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99bbbf9aa851fc6438e2ab12fadfce32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  HealthBar: {fileID: 3753853294680023563}
+  manager: {fileID: 0}
+--- !u!54 &1993571498
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733087005195959773}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &733087005770989783
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
+
 public class Targeting : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -95,11 +96,19 @@ public class Targeting : MonoBehaviour
                 {
                     
                     transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+
+
+                    Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
+                    Quaternion rotation = Quaternion.LookRotation(direction);
+                    FirePoint.transform.rotation = rotation;
+
                     cansee = true;
 
                     if (reload == false)
                     {
+
                         StartCoroutine(fireBullet());
+
                     }
                     
                   
@@ -184,7 +193,7 @@ public class Targeting : MonoBehaviour
         Instantiate (Bullet, FirePoint.transform.position, FirePoint.transform.rotation);
 
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
 
         reload = false;
     }
@@ -218,17 +227,17 @@ public class Targeting : MonoBehaviour
             if (EnemiesInRange.Count() != 0)
             {
                 GameObject Closest = EnemiesInRange[0];
-                float tempdistance = Vector3.Distance(manager.Enemies[0].transform.position, gameObject.transform.position);
+                float tempdistance = Vector3.Distance(EnemiesInRange[0].transform.position, gameObject.transform.position);
 
 
                 for (int i = 0; i < EnemiesInRange.Count(); i++)
                 {
 
-                    float distance = Vector3.Distance(manager.Enemies[i].transform.position, gameObject.transform.position);
+                    float distance = Vector3.Distance(EnemiesInRange[i].transform.position, gameObject.transform.position);
 
                     if (tempdistance > distance)
                     {
-                        Closest = manager.Enemies[i];
+                        Closest = EnemiesInRange[i];
                         tempdistance = distance;
                     }
 

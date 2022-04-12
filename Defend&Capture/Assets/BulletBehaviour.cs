@@ -7,12 +7,12 @@ public class BulletBehaviour : MonoBehaviour
     // Start is called before the first frame update
 
     private float movementSpeed = 300;
-    public string gameobjectTag;
+    
     void Start()
     {
 
 
-        gameobjectTag = gameObject.tag;
+      
 
 
     }

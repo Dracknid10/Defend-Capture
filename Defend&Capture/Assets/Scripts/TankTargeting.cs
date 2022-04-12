@@ -15,7 +15,7 @@ public class TankTargeting : MonoBehaviour
     public statManager manager;
     public bool targetLimiter;
     public GameObject closestTarget;
-    private float Range = 200;
+    private float Range = 100;
     public GameObject selector;
     public GameObject Turret;
 
@@ -82,6 +82,9 @@ public class TankTargeting : MonoBehaviour
                 {
 
                     Turret.transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+                    Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
+                    Quaternion rotation = Quaternion.LookRotation(direction);
+                    FirePoint.transform.rotation = rotation;
                     cansee = true;
 
                     if (reload == false)

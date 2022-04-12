@@ -27,6 +27,7 @@ TagManager:
   - missile
   - VehicleUiOptions
   - Heli
+  - Rocket
   layers:
   - Default
   - TransparentFX
