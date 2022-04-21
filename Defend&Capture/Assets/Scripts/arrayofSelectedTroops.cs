@@ -39,7 +39,7 @@ public class arrayofSelectedTroops : MonoBehaviour
 
                 for (int i = 0; i < SelectedTroops.Count; i++)
                 {
-               
+                   
 
                     agent = SelectedTroops[i].GetComponent<NavMeshAgent>();
 

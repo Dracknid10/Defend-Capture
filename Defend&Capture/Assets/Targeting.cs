@@ -16,7 +16,7 @@ public class Targeting : MonoBehaviour
     public statManager manager;
     public bool targetLimiter;
     public GameObject closestTarget;
-    private float Range = 100;
+    private float Range = 200;
     public GameObject selector;
 
     public GameObject RELOCATE0;
@@ -36,7 +36,8 @@ public class Targeting : MonoBehaviour
     public GameObject Bullet;
     public GameObject FirePoint;
     private bool reload;
-    
+
+    public GameObject Turret;
 
     public List<Vector3> relocatetargets = new List<Vector3>();
 
@@ -56,9 +57,12 @@ public class Targeting : MonoBehaviour
 
         reload = false;
 
- 
 
-       
+        if (gameObject.tag == "Tank")
+        {
+            Turret = this.gameObject.transform.GetChild(1).gameObject;
+        }
+
     }
 
     // Update is called once per frame
@@ -92,18 +96,32 @@ public class Targeting : MonoBehaviour
             if (Physics.Raycast(lookingPosition, raydirection, out hitEnemey, Range))
             {
                 
-                if (hitEnemey.transform.gameObject.tag == "EnemySoldier")
+                if (hitEnemey.transform.gameObject.tag == "EnemySoldier"|| hitEnemey.transform.gameObject.tag == "EnemyTank" || hitEnemey.transform.gameObject.tag == "EnemyHeli")
                 {
-                    
-                    transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+
+                    if (gameObject.tag == "Soilder" || gameObject.tag == "Heli")
+                    {
+
+                        transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+                        Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
+                        Quaternion rotation = Quaternion.LookRotation(direction);
+                        FirePoint.transform.rotation = rotation;
+
+                        cansee = true;
+                    }
+                    if (gameObject.tag == "Tank")
+                    {
+
+                        Turret.transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+                        Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
+                        Quaternion rotation = Quaternion.LookRotation(direction);
+                        FirePoint.transform.rotation = rotation;
+                        cansee = true;
 
 
-                    Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
-                    Quaternion rotation = Quaternion.LookRotation(direction);
-                    FirePoint.transform.rotation = rotation;
+                    }
 
-                    cansee = true;
-
+                        
                     if (reload == false)
                     {
 
@@ -114,7 +132,8 @@ public class Targeting : MonoBehaviour
                   
 
                 }
-                else if (hitEnemey.transform.gameObject.tag != "EnemySoldier") { cansee = false; }
+                else if (hitEnemey.transform.gameObject.tag != "EnemySoldier" || hitEnemey.transform.gameObject.tag == "EnemyTank" || hitEnemey.transform.gameObject.tag == "EnemyHeli") 
+                { cansee = false; }
 
 
             }
@@ -129,30 +148,29 @@ public class Targeting : MonoBehaviour
 
             if (Physics.Raycast(lookingPosition, gameObject.transform.forward, out hitDirection, Range))
             {
-               
 
-
-                if (hitDirection.transform.gameObject.tag == "Soilder")
-                {
                 
-                    if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
+                    if (hitDirection.transform.gameObject.tag == "Soilder")
                     {
-                        rotateAngle();
+                
+                        if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
+                        {
+                            rotateAngle();
 
+                        }
                     }
-                }
 
 
-                if (hitDirection.transform.gameObject.tag == "Tank")
-                {
-
-                    if (hitDirection.transform.gameObject.GetComponent<TankTargeting>().cansee == true)
+                    if (hitDirection.transform.gameObject.tag == "Tank")
                     {
-                        rotateAngle();
 
+                        if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
+                        {
+                            rotateAngle();
+
+                        }
                     }
-                }
-
+                
 
             }
 
@@ -179,8 +197,8 @@ public class Targeting : MonoBehaviour
         relocatetargets.Add(RELOCATE2trans);
         relocatetargets.Add(RELOCATE3trans);
 
-        agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
-
+        agent.SetDestination(relocatetargets[Random.Range(0, relocatetargets.Count)]);
+        
 
 
     }
@@ -193,7 +211,7 @@ public class Targeting : MonoBehaviour
         Instantiate (Bullet, FirePoint.transform.position, FirePoint.transform.rotation);
 
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         reload = false;
     }

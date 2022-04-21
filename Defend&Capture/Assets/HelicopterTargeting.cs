@@ -24,7 +24,7 @@ public class HelicopterTargeting : MonoBehaviour
 
     public GameObject Bullet;
     public GameObject FirePoint;
-    public GameObject FirePoint2;
+
     private bool reload;
 
 
@@ -81,17 +81,15 @@ public class HelicopterTargeting : MonoBehaviour
             if (Physics.Raycast(transform.position, raydirection, out hitEnemey, Range))
             {
 
-                if (hitEnemey.transform.gameObject.tag == "EnemySoldier")
+                if (hitEnemey.transform.gameObject.tag == "EnemySoldier" || hitEnemey.transform.gameObject.tag == "EnemyTank")
                 {
 
                     Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
-                    Vector3 direction2 = hitEnemey.transform.position - FirePoint2.transform.position;
+                  
                     Quaternion rotation = Quaternion.LookRotation(direction);
-                    Quaternion rotation2 = Quaternion.LookRotation(direction2);
-
+       
                     FirePoint.transform.rotation = rotation;
-                    FirePoint2.transform.rotation = rotation2;
-
+                   
 
                     cansee = true;
 
@@ -103,7 +101,7 @@ public class HelicopterTargeting : MonoBehaviour
 
 
                 }
-                else if (hitEnemey.transform.gameObject.tag != "EnemySoldier") { cansee = false; }
+                else if (hitEnemey.transform.gameObject.tag != "EnemySoldier" || hitEnemey.transform.gameObject.tag == "EnemyTank") { cansee = false; }
 
 
             }
@@ -124,10 +122,10 @@ public class HelicopterTargeting : MonoBehaviour
 
 
         Instantiate(Bullet, FirePoint.transform.position, FirePoint.transform.rotation);
-        Instantiate(Bullet, FirePoint2.transform.position, FirePoint.transform.rotation);
+        
 
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 
         reload = false;
     }

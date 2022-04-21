@@ -78,7 +78,7 @@ public class TankTargeting : MonoBehaviour
             if (Physics.Raycast(transform.position, raydirection, out hitEnemey, Range))
             {
 
-                if (hitEnemey.transform.gameObject.tag == "EnemySoldier")
+                if (hitEnemey.transform.gameObject.tag == "EnemySoldier" || hitEnemey.transform.gameObject.tag == "EnemyTank")
                 {
 
                     Turret.transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
@@ -95,7 +95,7 @@ public class TankTargeting : MonoBehaviour
 
 
                 }
-                else if (hitEnemey.transform.gameObject.tag != "EnemySoldier") { cansee = false; }
+                else if (hitEnemey.transform.gameObject.tag != "EnemySoldier" || hitEnemey.transform.gameObject.tag == "EnemyTank") { cansee = false; }
 
 
             }

@@ -18,7 +18,7 @@ public class AlliyDamage : MonoBehaviour
         
 
       
-        Health = 100f;
+        Health = 20000000000000f;
         HealthBar.maxValue = Health;
         HealthBar.value = Health;
 
@@ -29,7 +29,7 @@ public class AlliyDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log("HIT");
+  
 
         if (gameObject.tag == "Soilder")
         {
@@ -61,7 +61,7 @@ public class AlliyDamage : MonoBehaviour
             }
         }
 
-        if (gameObject.tag == "EnemyTank")
+        if (gameObject.tag == "Tank")
         {
             if (other.tag == "bullet")
             {
@@ -90,7 +90,7 @@ public class AlliyDamage : MonoBehaviour
                 DeathCheck();
             }
         }
-        if (gameObject.tag == "EnemyHeli")
+        if (gameObject.tag == "Heli")
         {
             if (other.tag == "bullet")
             {
@@ -114,7 +114,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "Rocket")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 70;
+                Health -= 10;
                 HealthBar.value = Health;
                 DeathCheck();
             }
@@ -130,6 +130,7 @@ public class AlliyDamage : MonoBehaviour
         {
 
             manager.AllTroops.Remove(gameObject);
+            manager.SelectedTroops.Remove(gameObject);
             Destroy(gameObject);
         }
 

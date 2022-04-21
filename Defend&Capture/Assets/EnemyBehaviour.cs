@@ -17,6 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 
     public List<GameObject> EnemiesInRange = new List<GameObject>();
+    public List<GameObject> CloseAllies = new List<GameObject>();
     public List<Vector3> relocatetargets = new List<Vector3>();
 
 
@@ -40,6 +41,8 @@ public class EnemyBehaviour : MonoBehaviour
     public Vector3 RELOCATE2trans;
     public Vector3 RELOCATE3trans;
 
+    public GameObject Turret;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +50,7 @@ public class EnemyBehaviour : MonoBehaviour
         TargetingManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
 
         manager.Enemies.Add(gameObject);
-        Health = 100f;
+        Health = 200f;
         HealthBar.maxValue = Health;
         HealthBar.value = Health;
 
@@ -58,18 +61,26 @@ public class EnemyBehaviour : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
 
+
+        if (gameObject.tag == "EnemyTank")
+        {
+            Turret = this.gameObject.transform.GetChild(0).gameObject;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        
+
         if (targetLimiter && TargetingManager.AllTroops.Count != 0)
         {
 
 
             StartCoroutine(getTargets());
-
+            StartCoroutine(getCloseAllies());
 
 
         }
@@ -84,21 +95,43 @@ public class EnemyBehaviour : MonoBehaviour
 
             lookingPosition = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
 
-            Debug.DrawRay(lookingPosition, raydirection, Color.yellow, 1, true);
+            Debug.DrawRay(lookingPosition, raydirection, Color.red, 1, true);
 
             if (Physics.Raycast(lookingPosition, raydirection, out hitEnemey, Range))
             {
 
-                if (hitEnemey.transform.gameObject.tag == "Soilder" || hitEnemey.transform.gameObject.tag == "Tank")
+                if (hitEnemey.transform.gameObject.tag == "Soilder" || hitEnemey.transform.gameObject.tag == "Tank" || hitEnemey.transform.gameObject.tag == "Heli")
                 {
 
-                    transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+                    
 
-                    Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
-                    Quaternion rotation = Quaternion.LookRotation(direction);
-                    FirePoint.transform.rotation = rotation;
 
-                    cansee = true;
+                    if (gameObject.tag == "EnemySoldier" || gameObject.tag == "EnemyHeli")
+                    {
+                        
+                        transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+                        Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
+                        Quaternion rotation = Quaternion.LookRotation(direction);
+                        FirePoint.transform.rotation = rotation;
+
+                        cansee = true;
+                    }
+
+                    
+
+                    if (gameObject.tag == "EnemyTank")
+                    {
+
+                        
+                        Turret.transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+
+                        Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
+                        Quaternion rotation = Quaternion.LookRotation(direction);
+                        FirePoint.transform.rotation = rotation;
+
+                        cansee = true;
+                    }
+                    
 
                     if (reload == false)
                     {
@@ -108,10 +141,12 @@ public class EnemyBehaviour : MonoBehaviour
 
 
                 }
-                else if (hitEnemey.transform.gameObject.tag != "Soilder") { cansee = false; }
+                else if (hitEnemey.transform.gameObject.tag != "Soilder" || hitEnemey.transform.gameObject.tag == "Tank" || hitEnemey.transform.gameObject.tag == "Heli") { cansee = false; }
 
 
             }
+
+            
 
             lookingPosition = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
 
@@ -147,10 +182,11 @@ public class EnemyBehaviour : MonoBehaviour
             }
 
 
-
+           
 
 
         }
+        else { cansee = false; }
 
 
     }
@@ -170,12 +206,67 @@ public class EnemyBehaviour : MonoBehaviour
         relocatetargets.Add(RELOCATE2trans);
         relocatetargets.Add(RELOCATE3trans);
 
-        agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
+        agent.SetDestination(relocatetargets[Random.Range(0, relocatetargets.Count)]);
 
 
 
     }
-    IEnumerator fireBullet()
+
+
+    IEnumerator getCloseAllies()
+    {
+        CloseAllies.Clear();
+
+        if (cansee == false)
+        {
+            for (int i = 0; i < manager.Enemies.Count(); i++)
+            {
+                float distance = Vector3.Distance(manager.Enemies[i].transform.position, gameObject.transform.position);
+
+
+
+                if (distance <= Range)
+                {
+                    CloseAllies.Add(manager.Enemies[i]);
+                }
+
+
+            }
+
+            for (int i = 0; i < CloseAllies.Count(); i++)
+            {
+                if (CloseAllies != null)
+                {
+                    if (CloseAllies[i].GetComponent<EnemyBehaviour>().cansee == true && cansee == false && CloseAllies[i] != null)
+                    {
+                        if (CloseAllies[i].GetComponent<EnemyBehaviour>().relocatetargets != null)
+                        {
+
+
+                            //agent.SetDestination(CloseAllies[i].GetComponent<EnemyBehaviour>().relocatetargets[Random.Range(0, CloseAllies[i].GetComponent<EnemyBehaviour>().relocatetargets.Count)]);
+
+                            //agent.SetDestination();
+
+                            break;
+                        }
+                        
+                        
+                        
+                    }
+
+                }
+
+
+            }
+        }
+
+        yield return new WaitForSeconds(1f);
+    }
+
+
+
+
+        IEnumerator fireBullet()
     {
         reload = true;
 
@@ -183,7 +274,7 @@ public class EnemyBehaviour : MonoBehaviour
         Instantiate(Bullet, FirePoint.transform.position, FirePoint.transform.rotation);
 
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         reload = false;
     }
@@ -202,14 +293,19 @@ public class EnemyBehaviour : MonoBehaviour
 
         for (int i = 0; i < TargetingManager.AllTroops.Count; i++)
         {
-            float distance = Vector3.Distance(TargetingManager.AllTroops[i].transform.position, gameObject.transform.position);
-
-
-
-            if (distance <= Range)
+            if (TargetingManager.AllTroops[i] != null)
             {
-                EnemiesInRange.Add(TargetingManager.AllTroops[i]);
+                float distance = Vector3.Distance(TargetingManager.AllTroops[i].transform.position, gameObject.transform.position);
+
+
+
+                if (distance <= Range)
+                {
+                    EnemiesInRange.Add(TargetingManager.AllTroops[i]);
+                }
             }
+
+         
 
 
         }
@@ -254,7 +350,10 @@ public class EnemyBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
         {
 
-            if (gameObject.tag == "EnemySoldier")
+
+        
+
+        if (gameObject.tag == "EnemySoldier")
             {
                 if (other.tag == "bullet")
                 {
@@ -337,7 +436,7 @@ public class EnemyBehaviour : MonoBehaviour
                 if (other.tag == "Rocket")
                 {
                     Destroy(other.transform.gameObject);
-                    Health -= 70;
+                    Health -= 10;
                     HealthBar.value = Health;
                     DeathCheck();
                 }
