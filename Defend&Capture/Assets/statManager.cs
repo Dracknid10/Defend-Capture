@@ -20,7 +20,7 @@ public class statManager : MonoBehaviour
 
 
     public List<GameObject> Enemies = new List<GameObject>();
-
+    public List<GameObject> CaptainSpheres = new List<GameObject>();
 
     void Start()
     {

@@ -11,6 +11,7 @@ public class arrayofSelectedTroops : MonoBehaviour
 
     public List<GameObject> SelectedTroops = new List<GameObject>();
     public List<GameObject> AllTroops = new List<GameObject>();
+    
 
     [SerializeField]
     NavMeshAgent agent;

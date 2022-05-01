@@ -197,7 +197,7 @@ public class Targeting : MonoBehaviour
         relocatetargets.Add(RELOCATE2trans);
         relocatetargets.Add(RELOCATE3trans);
 
-        agent.SetDestination(relocatetargets[Random.Range(0, relocatetargets.Count)]);
+        agent.SetDestination(relocatetargets[Random.Range(0, relocatetargets.Count - 1)]);
         
 
 

@@ -30,6 +30,8 @@ TagManager:
   - Rocket
   - EnemyTank
   - EnemyHeli
+  - AirPadOptions
+  - HeliSpawn
   layers:
   - Default
   - TransparentFX

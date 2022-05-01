@@ -18,7 +18,7 @@ public class AlliyDamage : MonoBehaviour
         
 
       
-        Health = 20000000000000f;
+        Health = 500f;
         HealthBar.maxValue = Health;
         HealthBar.value = Health;
 
