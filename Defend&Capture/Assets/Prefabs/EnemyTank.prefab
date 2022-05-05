@@ -1037,7 +1037,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.71
-  m_Speed: 15
+  m_Speed: 20
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1092,6 +1092,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 1027951482579388527}
   manager: {fileID: 0}
+  Sphere: {fileID: 0}
+  SphereManger: {fileID: 0}
   TargetingManager: {fileID: 0}
   EnemiesInRange: []
   CloseAllies: []
@@ -1099,6 +1101,7 @@ MonoBehaviour:
   closestTarget: {fileID: 0}
   targetLimiter: 0
   cansee: 0
+  movingInRange: 0
   Bullet: {fileID: 863923329645480517, guid: 814fce8aa882ae6488de744dd86bfcce, type: 3}
   FirePoint: {fileID: 4023046570707083621}
   RELOCATE0: {fileID: 3412039985636242380}
@@ -1110,6 +1113,7 @@ MonoBehaviour:
   RELOCATE2trans: {x: 0, y: 0, z: 0}
   RELOCATE3trans: {x: 0, y: 0, z: 0}
   Turret: {fileID: 0}
+  number: 0
 --- !u!1 &8893293572553529630
 GameObject:
   m_ObjectHideFlags: 0

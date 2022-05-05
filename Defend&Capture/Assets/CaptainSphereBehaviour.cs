@@ -9,8 +9,11 @@ public class CaptainSphereBehaviour : MonoBehaviour
     public statManager manager;
     public List<GameObject> SubForces = new List<GameObject>();
     NavMeshAgent agent;
-    Vector3 finalPosition;
-    // Start is called before the first frame update
+    
+    
+
+
+
     void Start()
     {
 
@@ -28,10 +31,13 @@ public class CaptainSphereBehaviour : MonoBehaviour
     void Update()
     {
 
-        if (agent.transform.position == finalPosition)
+        if (agent.hasPath)
         {
+            
+        }
+        else {
             GetDestination();
-            Debug.Log("hit");
+            
         }
  
     
@@ -40,14 +46,28 @@ public class CaptainSphereBehaviour : MonoBehaviour
     public void GetDestination()
     {
 
-        Vector3 randomDirection = Random.insideUnitSphere * 100;
 
+        for (int i = 0; i < SubForces.Count; i++)
+        {
+            if (SubForces[i] != null)
+            {
+                if (SubForces[i].GetComponent<EnemyBehaviour>().cansee)
+                {
+                    agent.SetDestination(SubForces[i].transform.position);
 
-        randomDirection += transform.position;
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, 100, 1);
-        finalPosition = hit.position;
-        agent.SetDestination(finalPosition);
+                }
+                else 
+                { 
+                    agent.SetDestination(manager.PatrolPoints[Random.Range(0, manager.PatrolPoints.Count)].transform.position); 
+                
+                }
+            }
+            else { agent.SetDestination(manager.PatrolPoints[Random.Range(0, manager.PatrolPoints.Count)].transform.position); }
+
+        }
+       
+
+        
 
 
     }

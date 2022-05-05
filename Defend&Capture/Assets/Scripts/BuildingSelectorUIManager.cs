@@ -8,13 +8,11 @@ public class BuildingSelectorUIManager : MonoBehaviour //IPointerEnterHandler, I
 {
     // Start is called before the first frame update
     private PadManager pass;
+    private statManager manager;
+
 
     public GameObject BuildingPadUi;
     public Animator UiAnimation;
-
-    private clickPad0 built;
-
-    public Text desciption;
 
     [SerializeField] TMPro.TextMeshProUGUI text;
 
@@ -25,135 +23,117 @@ public class BuildingSelectorUIManager : MonoBehaviour //IPointerEnterHandler, I
     [SerializeField] UnityEngine.UI.Button AP;
 
 
+    public Text BarrackText;
+    public Text SupplyText;
+    public Text reactorText;
+    public Text VehcileText;
+    public Text AirText;
+
+   
+
+
     void Start()
     {
         pass = FindObjectOfType<PadManager>();
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
 
         UiAnimation = BuildingPadUi.GetComponent<Animator>();
 
        
 
-        Barracks = GameObject.FindGameObjectWithTag("BarracksButton").GetComponent<UnityEngine.UI.Button>();
+        Barracks = GameObject.FindGameObjectWithTag("BarracksButton").GetComponent<UnityEngine.UI.Button>();     
         SupplyPad = GameObject.FindGameObjectWithTag("SupplyPadButton").GetComponent<UnityEngine.UI.Button>();
         Reactor = GameObject.FindGameObjectWithTag("ReactorButton").GetComponent<UnityEngine.UI.Button>();
         VD = GameObject.FindGameObjectWithTag("VDbutton").GetComponent<UnityEngine.UI.Button>();
         AP = GameObject.FindGameObjectWithTag("APbutton").GetComponent<UnityEngine.UI.Button>();
     }
 
+    void Update()
+    {
+        if (manager.Supplies >= 500)
+        {
+            BarrackText.color = Color.white;
+        }
+        else
+        {
+            BarrackText.color = Color.red;
+        }
+
+            if (manager.Supplies >= 150)
+            {
+                SupplyText.color = Color.white;
+            }
+            else
+            {
+                SupplyText.color = Color.red;
+            }
+
+        if (manager.Supplies >= 1500)
+        {
+            reactorText.color = Color.white;
+        }
+        else
+        {
+            reactorText.color = Color.red;
+        }
+
+            if (manager.Supplies >= 700 && manager.reactorLvl >= 1)
+            {
+                VehcileText.color = Color.white;
+            }
+            else
+            {
+                VehcileText.color = Color.red;
+            }
+
+        if (manager.Supplies >= 700 && manager.reactorLvl >= 1)
+        {
+            AirText.color = Color.white;
+        }
+        else
+        {
+            AirText.color = Color.red;
+        }
+
+
+
+
+
+
+    }
+
+  
     public void barrackstext()
     {
 
-        text.SetText($"Barracks cost x supplies" +
-            $" produce infantry troops for x supplies");
+        text.SetText($"Barracks cost 500 supplies and" +
+            $" produce infantry troops for 300 supplies each.");
 
     }
     public void Supplytext()
     {
 
-        text.SetText($"SupplyPad.......");
+        text.SetText($"Supply pads cost 150 supplies and serve to provide supplies over time");
 
     }
     public void ReactorText()
     {
 
-        text.SetText($"Reactor.......");
+        text.SetText($"Reactors cost 1500 supplies and provide power to your base, you'll need one to build a vehicle depot and air pad");
 
     }
     public void VDText()
     {
 
-        text.SetText($"VD.......");
+        text.SetText($"Vehicle Depots cost 700 supplies and make tanks at 300 supplies each");
 
     }
     public void APText()
     {
 
-        text.SetText($"AP.......");
+        text.SetText($"Air pads cost 700 supplies and make helicopters at 300 supplies each");
 
     }
-
-
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    if (Barracks)
-    //    {
-
-    //        text.SetText($"barracks.......");
-    //    }
-
-    //    if (SupplyPad)
-    //    {
-
-    //        text.SetText($"supplypad.........");
-    //    }
-
-    //    if (Reactor)
-    //    {
-
-    //        text.SetText($"reactor.....");
-    //    }
-
-    //    if (VD)
-    //    {
-
-    //        text.SetText($"vehicles........");
-    //    }
-
-    //    if (AP)
-    //    {
-
-    //        text.SetText($"airpad.........");
-    //    }
-
-
-    //}
-
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-
-    //    Debug.Log(eventData.pointerEnter.transform.gameObject);
-
-    //    if (Barracks)
-    //    {
-
-    //       text.SetText($"barracks.......");
-    //    }
-
-    //    if (SupplyPad)
-    //    {
-
-    //        text.SetText($"supplypad.........");
-    //    }
-
-    //    if (Reactor)
-    //    {
-
-    //        text.SetText($"reactor.....");
-    //    }
-
-    //    if (VD)
-    //    {
-
-    //        text.SetText($"vehicles........");
-    //    }
-
-    //    if (AP)
-    //    {
-
-    //        text.SetText($"airpad.........");
-    //    }
-
-    //    Debug.Log(eventData.pointerEnter.tag);
-    //}
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    if (btn.name == "GruffysButton")
-    //    {
-    //        Debug.Log("you have left this button");
-    //        text.SetText($"Bloody Marvelous");
-    //    }
-
-    //}
 
 
     public void BuildBarracks()

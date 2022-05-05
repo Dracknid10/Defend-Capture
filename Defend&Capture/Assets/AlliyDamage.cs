@@ -15,21 +15,35 @@ public class AlliyDamage : MonoBehaviour
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
-        
 
-      
+        manager.AllTroops.Add(gameObject);
+
         Health = 500f;
+       
+        if (gameObject.tag == "PlayerBase")
+        {
+            Health = 10000f;
+            
+        }
         HealthBar.maxValue = Health;
         HealthBar.value = Health;
-
-
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
+   
+        if (gameObject.tag == "PlayerBase" && other.tag == "bullet" || other.tag == "missile" || other.tag == "Rocket")
+        {
 
-  
+            Health -= 10;
+            HealthBar.value = Health;
+
+        }
+        
+
+
+
 
         if (gameObject.tag == "Soilder")
         {

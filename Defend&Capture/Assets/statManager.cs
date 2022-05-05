@@ -21,15 +21,15 @@ public class statManager : MonoBehaviour
 
     public List<GameObject> Enemies = new List<GameObject>();
     public List<GameObject> CaptainSpheres = new List<GameObject>();
+    public List<GameObject> PatrolPoints = new List<GameObject>();
+
+
 
     void Start()
     {
         MaxPop = 50;
         CurrentPop = 0;
-        Supplies = 7000;
-
-
-
+        Supplies = 10000050;
 
     }
 

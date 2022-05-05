@@ -14,7 +14,8 @@ public class clickPad0 : MonoBehaviour
     
 
     public Vector3 spawnPos;
-    public clickPad0 built;
+    public GameObject pad;
+    //public clickPad0 built;
     private statManager manager;
 
 
@@ -24,7 +25,7 @@ public class clickPad0 : MonoBehaviour
     public GameObject VehicleDepoLVL1;
     public GameObject AirPadLVL1;
 
-    private GameObject currentBuilding;
+    
 
     public bool builtUpon = false;
 
@@ -37,12 +38,17 @@ public class clickPad0 : MonoBehaviour
         UiAnimation = BuildingPadUi.GetComponent<Animator>();
 
         spawnPos = gameObject.transform.GetChild(0).gameObject.transform.position;
-
+        
 
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
 
       
     }
+    void Update()
+    {
+
+    }
+
 
     void OnMouseDown()
     {
@@ -59,8 +65,7 @@ public class clickPad0 : MonoBehaviour
 
     }
 
-
-
+ 
     public void BuildBarracksNest()
     {
 
@@ -69,14 +74,17 @@ public class clickPad0 : MonoBehaviour
     }
 
   IEnumerator buildBarracks()
-    {
+   {
 
         builtUpon = true;
         manager.Supplies = manager.Supplies - 500;
         yield return new WaitForSeconds(5);
         GameObject Building = (GameObject)Instantiate(BarracksLVL1);
         Building.transform.position = spawnPos;
+        Building.GetComponentInChildren<BarrackMenu>().PadOn = gameObject;
 
+
+       
     }
 
 
@@ -97,7 +105,8 @@ public class clickPad0 : MonoBehaviour
         yield return new WaitForSeconds(5);
         GameObject Building = (GameObject)Instantiate(SupplyPadLVL1);
         Building.transform.position = spawnPos;
-        currentBuilding = Building;
+        
+        
     }
 
 
@@ -116,7 +125,8 @@ public class clickPad0 : MonoBehaviour
         yield return new WaitForSeconds(5);
         GameObject Building = (GameObject)Instantiate(ReactorLVL1);
         Building.transform.position = spawnPos;
-        currentBuilding = Building;
+       
+
     }
 
 
@@ -135,7 +145,8 @@ public class clickPad0 : MonoBehaviour
         yield return new WaitForSeconds(5);
         GameObject Building = (GameObject)Instantiate(VehicleDepoLVL1);
         Building.transform.position = spawnPos;
-        currentBuilding = Building;
+        Building.GetComponentInChildren<VehicleMenu>().PadOn = gameObject;
+
     }
 
 
@@ -154,7 +165,8 @@ public class clickPad0 : MonoBehaviour
         yield return new WaitForSeconds(5);
         GameObject Building = (GameObject)Instantiate(AirPadLVL1);
         Building.transform.position = spawnPos;
-        currentBuilding = Building;
+        Building.GetComponentInChildren<AirPadMenu>().PadOn = gameObject;
+
     }
 
 

@@ -42,7 +42,7 @@ public class onclickscript : MonoBehaviour
 
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
 
-        parentarray.AllTroops.Add(gameObject);
+        
 
         agent.destination = goal.position;
 

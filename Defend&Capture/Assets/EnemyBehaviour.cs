@@ -27,9 +27,10 @@ public class EnemyBehaviour : MonoBehaviour
 
 
     public GameObject closestTarget;
-    private float Range = 200;
+    private float Range = 150;
     private float defaultStoppingDistance = 30f;
     public bool targetLimiter;
+    public bool repathingLimiter;
     private Vector3 lookingPosition;
     public bool cansee;
     public bool movingInRange;
@@ -71,6 +72,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 
         targetLimiter = true;
+        repathingLimiter = true;
 
         reload = false;
 
@@ -93,10 +95,11 @@ public class EnemyBehaviour : MonoBehaviour
             AssignSpheres();
         }
 
-        if (cansee == false && movingInRange == false)
+        if (cansee == false && movingInRange == false && targetLimiter == true)
         {
-            agent.ResetPath();
-            agent.SetDestination(Sphere.transform.position);
+
+            StartCoroutine(getIdleDetination());
+
         }
         if (targetLimiter && TargetingManager.AllTroops.Count != 0)
         {
@@ -123,7 +126,10 @@ public class EnemyBehaviour : MonoBehaviour
             if (Physics.Raycast(lookingPosition, raydirection, out hitEnemey, Range))
             {
 
-                if (hitEnemey.transform.gameObject.tag == "Soilder" || hitEnemey.transform.gameObject.tag == "Tank" || hitEnemey.transform.gameObject.tag == "Heli")
+                if (hitEnemey.transform.gameObject.tag == "Soilder" || 
+                    hitEnemey.transform.gameObject.tag == "Tank" || 
+                    hitEnemey.transform.gameObject.tag == "Heli" || 
+                    hitEnemey.transform.gameObject.tag == "PlayerBase")
                 {
 
                     agent.ResetPath();
@@ -220,7 +226,16 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
- 
+ IEnumerator getIdleDetination()
+    {
+        repathingLimiter = false;
+
+        agent.SetDestination(Sphere.transform.position);
+        yield return new WaitForSeconds(3f);
+
+        repathingLimiter = true;
+
+    }
     private void rotateAngle()
     {
         relocatetargets.Clear();

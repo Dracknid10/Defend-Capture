@@ -6,16 +6,10 @@ public class PadManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    //public GameObject BarracksLVL1;
-    //public GameObject SupplyPadLVL1;
-    //public GameObject ReactorLVL1;
-    //public GameObject VehicleDepoLVL1;
-    //public GameObject AirPadLVL1;
+  
 
     private clickPad0 built;
     
-
-
     public string BuildingToBuild;
 
     [SerializeField] private GameObject SelectedPad;
@@ -29,19 +23,6 @@ public class PadManager : MonoBehaviour
     {
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-      
-
-
-        
-    }
-
-
 
     public GameObject selectedpad(GameObject pad)
     {
@@ -57,10 +38,6 @@ public class PadManager : MonoBehaviour
 
 
         BuildingToBuild = Building;
-
-
-
-
         return BuildingToBuild;
     }
 

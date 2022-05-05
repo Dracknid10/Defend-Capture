@@ -13,6 +13,8 @@ public class AirPad : MonoBehaviour
     public Vector3 spawnLoc;
 
     private statManager manager;
+    public GameObject PadBelong;
+    public GameObject Building;
 
     void Start()
     {
@@ -28,22 +30,10 @@ public class AirPad : MonoBehaviour
 
 
     }
-
-    // Update is called once per frame
-    void Update()
+    public void DestroyBuilding()
     {
-
-    }
-
-
-
-    void OnMouseDown()
-    {
-
-
-        UiAnimation.SetBool("Ui true", true);
-        UiAnimation.SetBool("Ui Off", false);
-        UiAnimation.SetBool("Ui On", true);
+        PadBelong.GetComponent<clickPad0>().builtUpon = false;
+        Destroy(Building);
 
     }
 

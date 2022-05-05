@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3875791354727923071}
   - component: {fileID: 7211424000774614968}
   - component: {fileID: 2853209563803358185}
-  - component: {fileID: 4994987728064647956}
+  - component: {fileID: 2648359216591669929}
   m_Layer: 0
   m_Name: A2
   m_TagString: Untagged
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 1.9999996, z: 2.2269442}
   m_Center: {x: -0.0068174303, y: -0.03318908, z: -1.13476}
---- !u!114 &4994987728064647956
+--- !u!114 &2648359216591669929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,13 +108,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1106597475066508577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3a6e75b2b96e84eb1308a617ac9c5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 79a8465a55664e64a8bd90f9c18423c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AirPadsUI: {fileID: 0}
-  UiAnimation: {fileID: 0}
-  Soilder: {fileID: 5655163146560962310, guid: 12d965a04492aa143813795d167718ed, type: 3}
-  spawnLoc: {x: 0, y: 0, z: 0}
 --- !u!1 &7178933156041458072
 GameObject:
   m_ObjectHideFlags: 0

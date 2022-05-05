@@ -16,7 +16,7 @@ public class Targeting : MonoBehaviour
     public statManager manager;
     public bool targetLimiter;
     public GameObject closestTarget;
-    private float Range = 200;
+    private float Range = 150;
     public GameObject selector;
 
     public GameObject RELOCATE0;
