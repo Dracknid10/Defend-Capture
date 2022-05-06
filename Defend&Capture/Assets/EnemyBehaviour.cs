@@ -13,7 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     
 
     public statManager manager;
-
+    public GameOver gameover;
     public GameObject Sphere;
     public CaptainSphereBehaviour SphereManger;
 
@@ -39,6 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject Bullet;
     public GameObject FirePoint;
     NavMeshAgent agent;
+    public bool rotateWait;
 
     public GameObject RELOCATE0;
     public GameObject RELOCATE1;
@@ -59,14 +60,14 @@ public class EnemyBehaviour : MonoBehaviour
     {
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
         TargetingManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
-        
+        gameover = GameObject.FindGameObjectWithTag("gameOverManager").GetComponent<GameOver>();
         manager.Enemies.Add(gameObject);
 
         Asigned = false;
         movingInRange = false;
+        rotateWait = true;
 
-
-        Health = 500f;
+        Health = 300f;
         HealthBar.maxValue = Health;
         HealthBar.value = Health;
 
@@ -126,13 +127,9 @@ public class EnemyBehaviour : MonoBehaviour
             if (Physics.Raycast(lookingPosition, raydirection, out hitEnemey, Range))
             {
 
-                if (hitEnemey.transform.gameObject.tag == "Soilder" || 
-                    hitEnemey.transform.gameObject.tag == "Tank" || 
-                    hitEnemey.transform.gameObject.tag == "Heli" || 
-                    hitEnemey.transform.gameObject.tag == "PlayerBase")
-                {
+              
 
-                    agent.ResetPath();
+                    
 
 
                     if (gameObject.tag == "EnemySoldier" || gameObject.tag == "EnemyHeli")
@@ -143,7 +140,7 @@ public class EnemyBehaviour : MonoBehaviour
                         Quaternion rotation = Quaternion.LookRotation(direction);
                         FirePoint.transform.rotation = rotation;
 
-                        cansee = true;
+                        
                     }
 
                     
@@ -158,24 +155,32 @@ public class EnemyBehaviour : MonoBehaviour
                         Quaternion rotation = Quaternion.LookRotation(direction);
                         FirePoint.transform.rotation = rotation;
 
-                        cansee = true;
+                        
                     }
                     
 
-                    if (reload == false)
-                    {
-                        StartCoroutine(fireBullet());
-                    }
+                   
 
 
+                if (hitEnemey.transform.gameObject.tag == "Soilder" ||
+                    hitEnemey.transform.gameObject.tag == "Tank" ||
+                    hitEnemey.transform.gameObject.tag == "Heli" ||
+                    hitEnemey.transform.gameObject.tag == "PlayerBase")
+                {
 
+                    cansee = true;
                 }
-                else if (hitEnemey.transform.gameObject.tag != "Soilder" || hitEnemey.transform.gameObject.tag == "Tank" || hitEnemey.transform.gameObject.tag == "Heli") 
+                else 
                 { 
                     
                     cansee = false;
                     agent.stoppingDistance = defaultStoppingDistance;
                     
+                }
+
+                if (reload == false && cansee == true)
+                {
+                    StartCoroutine(fireBullet());
                 }
 
 
@@ -197,7 +202,7 @@ public class EnemyBehaviour : MonoBehaviour
 
                     if (hitDirection.transform.gameObject.GetComponent<EnemyBehaviour>().cansee == true)
                     {
-                        rotateAngle();
+                        StartCoroutine(rotateAngle());
 
                     }
                 }
@@ -208,7 +213,7 @@ public class EnemyBehaviour : MonoBehaviour
 
                     if (hitDirection.transform.gameObject.GetComponent<EnemyBehaviour>().cansee == true)
                     {
-                        rotateAngle();
+                        StartCoroutine(rotateAngle());
 
                     }
                 }
@@ -236,23 +241,29 @@ public class EnemyBehaviour : MonoBehaviour
         repathingLimiter = true;
 
     }
-    private void rotateAngle()
+    IEnumerator rotateAngle()
     {
-        relocatetargets.Clear();
+        if (rotateWait)
+        {
+            rotateWait = false;
 
-        RELOCATE0trans = RELOCATE0.transform.position;
-        RELOCATE1trans = RELOCATE1.transform.position;
-        RELOCATE2trans = RELOCATE2.transform.position;
-        RELOCATE3trans = RELOCATE3.transform.position;
+            relocatetargets.Clear();
 
-        relocatetargets.Add(RELOCATE0trans);
-        relocatetargets.Add(RELOCATE1trans);
-        relocatetargets.Add(RELOCATE2trans);
-        relocatetargets.Add(RELOCATE3trans);
+            RELOCATE0trans = RELOCATE0.transform.position;
+            RELOCATE1trans = RELOCATE1.transform.position;
+            RELOCATE2trans = RELOCATE2.transform.position;
+            RELOCATE3trans = RELOCATE3.transform.position;
 
-        agent.SetDestination(relocatetargets[Random.Range(0, relocatetargets.Count)]);
+            relocatetargets.Add(RELOCATE0trans);
+            relocatetargets.Add(RELOCATE1trans);
+            relocatetargets.Add(RELOCATE2trans);
+            relocatetargets.Add(RELOCATE3trans);
 
+            agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
 
+            yield return new WaitForSeconds(1f);
+            rotateWait = true;
+        }
 
     }
 
@@ -279,7 +290,7 @@ public class EnemyBehaviour : MonoBehaviour
 
             for (int i = 0; i < CloseAllies.Count(); i++)
             {
-                if (CloseAllies != null)
+                if (CloseAllies[i] != null && CloseAllies[i].tag != "EnemyBase")
                 {
                     if (CloseAllies[i].GetComponent<EnemyBehaviour>().cansee == true && cansee == false && CloseAllies[i] != null)
                     {
@@ -289,10 +300,6 @@ public class EnemyBehaviour : MonoBehaviour
                             movingInRange = true;
                             agent.ResetPath();
                             agent.SetDestination(CloseAllies[i].GetComponent<EnemyBehaviour>().closestTarget.transform.position);
-
-                            
-
-
 
                             break;
                         }
@@ -503,6 +510,10 @@ public class EnemyBehaviour : MonoBehaviour
 
                 manager.Enemies.Remove(gameObject);
                 Destroy(gameObject);
+                gameover.EnemiesKilled = gameover.EnemiesKilled + 1;
+
+
+
             }
 
 

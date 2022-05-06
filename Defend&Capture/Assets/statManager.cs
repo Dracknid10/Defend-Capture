@@ -13,7 +13,11 @@ public class statManager : MonoBehaviour
     public int CurrentPop;
 
 
-    
+    public bool playerWon = false;
+    public bool AIWon = false;
+
+
+
     public Text UIsupplies;
     public Text UIPopualtion;
     public Text UIReactorLVL;
@@ -43,6 +47,15 @@ public class statManager : MonoBehaviour
 
 
     }
+
+    
+
+
+
+
+
+
+
 
 
     public int addsupplies(int suppliesToAdd)

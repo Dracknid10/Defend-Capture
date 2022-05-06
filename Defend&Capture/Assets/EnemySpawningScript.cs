@@ -20,15 +20,16 @@ public class EnemySpawningScript : MonoBehaviour
     private bool HeliWait;
     private bool TankWait;
 
-    private bool population;
+    private float population;
 
     void Start()
     {
+        population = 0f;
         poweredup = false;
         SoilderWait = false;
         StartCoroutine(powerup());
         StartCoroutine(troopWait());
-        SoilderWait = false;
+        SoilderWait = true;
         HeliWait = false;
         TankWait = false;
     }
@@ -37,15 +38,10 @@ public class EnemySpawningScript : MonoBehaviour
     void Update()
     {
 
-        if (SoilderWait)
+        if (SoilderWait && population < 50)
         {
-
-
-
-
-
-
-
+            StartCoroutine(CreateSolider());
+            
         }
 
 
@@ -65,10 +61,13 @@ public class EnemySpawningScript : MonoBehaviour
     }
     IEnumerator CreateSolider()
     {
+        SoilderWait = false;
 
 
+       Instantiate(solider, Spawn.transform.position, Quaternion.identity);
+        population = population + 1;
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         SoilderWait = true;
 
     }

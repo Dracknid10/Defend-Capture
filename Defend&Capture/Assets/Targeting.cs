@@ -32,6 +32,7 @@ public class Targeting : MonoBehaviour
     private Vector3 lookingPosition;
 
     public bool cansee;
+    public bool rotateWait;
 
     public GameObject Bullet;
     public GameObject FirePoint;
@@ -57,6 +58,7 @@ public class Targeting : MonoBehaviour
 
         reload = false;
 
+        rotateWait = true;
 
         if (gameObject.tag == "Tank")
         {
@@ -83,7 +85,7 @@ public class Targeting : MonoBehaviour
 
             Vector3 raydirection = closestTarget.transform.position - gameObject.transform.position;
 
-
+            
 
             RaycastHit hitEnemey;
 
@@ -96,18 +98,18 @@ public class Targeting : MonoBehaviour
             if (Physics.Raycast(lookingPosition, raydirection, out hitEnemey, Range))
             {
                 
-                if (hitEnemey.transform.gameObject.tag == "EnemySoldier"|| hitEnemey.transform.gameObject.tag == "EnemyTank" || hitEnemey.transform.gameObject.tag == "EnemyHeli")
-                {
-
+             
+                    
                     if (gameObject.tag == "Soilder" || gameObject.tag == "Heli")
                     {
 
                         transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
+
                         Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
                         Quaternion rotation = Quaternion.LookRotation(direction);
                         FirePoint.transform.rotation = rotation;
 
-                        cansee = true;
+                        
                     }
                     if (gameObject.tag == "Tank")
                     {
@@ -116,31 +118,41 @@ public class Targeting : MonoBehaviour
                         Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
                         Quaternion rotation = Quaternion.LookRotation(direction);
                         FirePoint.transform.rotation = rotation;
+                      
+
+
+                    }               
+
+                    if (hitEnemey.transform.gameObject.tag == "EnemySoldier"||
+                        hitEnemey.transform.gameObject.tag == "EnemyTank"||
+                        hitEnemey.transform.gameObject.tag == "EnemyHeli"||
+                        hitEnemey.transform.gameObject.tag == "EnemyBase")
+                    { 
+
                         cansee = true;
+                        
 
-
+                    }         
+                    else 
+                    {
+                   
+                        cansee = false;
+                            
                     }
 
-                        
-                    if (reload == false)
+                    if (reload == false && cansee == true)
                     {
 
                         StartCoroutine(fireBullet());
 
                     }
-                    
-                  
-
-                }
-                else if (hitEnemey.transform.gameObject.tag != "EnemySoldier" || hitEnemey.transform.gameObject.tag == "EnemyTank" || hitEnemey.transform.gameObject.tag == "EnemyHeli") 
-                { cansee = false; }
 
 
             }
 
 
 
-
+            
 
             lookingPosition = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
 
@@ -148,28 +160,30 @@ public class Targeting : MonoBehaviour
 
             if (Physics.Raycast(lookingPosition, gameObject.transform.forward, out hitDirection, Range))
             {
+               
 
-                
-                    if (hitDirection.transform.gameObject.tag == "Soilder")
-                    {
-                
-                        if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
-                        {
-                            rotateAngle();
-
-                        }
-                    }
-
-
-                    if (hitDirection.transform.gameObject.tag == "Tank")
-                    {
+                if (hitDirection.transform.gameObject.tag == "Soilder")
+                {
+                        
 
                         if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
                         {
-                            rotateAngle();
+                        
+                                StartCoroutine(rotateAngle());
 
                         }
+                }
+
+
+                if (hitDirection.transform.gameObject.tag == "Tank")
+                {
+
+                    if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
+                    {
+                        StartCoroutine(rotateAngle());
+
                     }
+                }
                 
 
             }
@@ -183,24 +197,30 @@ public class Targeting : MonoBehaviour
 
     }
 
-    private void rotateAngle()
+    IEnumerator rotateAngle()
     {
-        relocatetargets.Clear();
+        if (rotateWait)
+        {
+            rotateWait = false;
 
-        RELOCATE0trans = RELOCATE0.transform.position;
-        RELOCATE1trans = RELOCATE1.transform.position;
-        RELOCATE2trans = RELOCATE2.transform.position;
-        RELOCATE3trans = RELOCATE3.transform.position;
+            relocatetargets.Clear();
 
-        relocatetargets.Add(RELOCATE0trans);
-        relocatetargets.Add(RELOCATE1trans);
-        relocatetargets.Add(RELOCATE2trans);
-        relocatetargets.Add(RELOCATE3trans);
+            RELOCATE0trans = RELOCATE0.transform.position;
+            RELOCATE1trans = RELOCATE1.transform.position;
+            RELOCATE2trans = RELOCATE2.transform.position;
+            RELOCATE3trans = RELOCATE3.transform.position;
 
-        agent.SetDestination(relocatetargets[Random.Range(0, relocatetargets.Count - 1)]);
-        
+            relocatetargets.Add(RELOCATE0trans);
+            relocatetargets.Add(RELOCATE1trans);
+            relocatetargets.Add(RELOCATE2trans);
+            relocatetargets.Add(RELOCATE3trans);
 
+            agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
 
+                yield return new WaitForSeconds(1f);
+            rotateWait = true;
+        }
+     
     }
 
     IEnumerator fireBullet()

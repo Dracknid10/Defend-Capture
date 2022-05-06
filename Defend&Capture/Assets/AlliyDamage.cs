@@ -9,7 +9,8 @@ public class AlliyDamage : MonoBehaviour
     public float Health;
     public Slider HealthBar;
     public arrayofSelectedTroops manager;
-
+    public statManager stat;
+    public GameOver gameover;
 
 
     void Start()
@@ -17,8 +18,10 @@ public class AlliyDamage : MonoBehaviour
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
 
         manager.AllTroops.Add(gameObject);
+        gameover = GameObject.FindGameObjectWithTag("gameOverManager").GetComponent<GameOver>();
+        stat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
 
-        Health = 500f;
+        Health = 300f;
        
         if (gameObject.tag == "PlayerBase")
         {
@@ -38,7 +41,10 @@ public class AlliyDamage : MonoBehaviour
 
             Health -= 10;
             HealthBar.value = Health;
-
+            if (Health <= 0)
+            {
+                gameover.AIWon = true;
+            }
         }
         
 
@@ -145,6 +151,7 @@ public class AlliyDamage : MonoBehaviour
 
             manager.AllTroops.Remove(gameObject);
             manager.SelectedTroops.Remove(gameObject);
+            stat.CurrentPop = stat.CurrentPop - 1;
             Destroy(gameObject);
         }
 
