@@ -68,7 +68,7 @@ public class EnemyBehaviour : MonoBehaviour
         movingInRange = false;
         rotateWait = true;
 
-        Health = 300f;
+        Health = 500f;
         HealthBar.maxValue = Health;
         HealthBar.value = Health;
 
@@ -121,9 +121,9 @@ public class EnemyBehaviour : MonoBehaviour
 
             RaycastHit hitDirection;
 
-            lookingPosition = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
+            lookingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-            Debug.DrawRay(lookingPosition, raydirection, Color.red, 1, true);
+            //Debug.DrawRay(lookingPosition, raydirection, Color.red, 1, true);
 
             if (Physics.Raycast(lookingPosition, raydirection, out hitEnemey, Range))
             {
@@ -156,8 +156,25 @@ public class EnemyBehaviour : MonoBehaviour
                         Quaternion rotation = Quaternion.LookRotation(direction);
                         FirePoint.transform.rotation = rotation;
 
-                        
+
+                    if (hitEnemey.transform.gameObject.tag == "EnemyTank" || hitEnemey.transform.gameObject.tag == "EnemySoldier")
+                    {
+
+                        if (cansee == false)
+                        {
+
+                            if (hitEnemey.transform.gameObject.GetComponent<EnemyBehaviour>().cansee == true)
+                            {
+                                StartCoroutine(rotateAngle());
+
+                            }
+                        }
+
                     }
+
+
+
+                }
                     
 
                    
@@ -191,7 +208,7 @@ public class EnemyBehaviour : MonoBehaviour
 
             lookingPosition = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
 
-            Debug.DrawRay(lookingPosition, gameObject.transform.forward * Range, Color.green, 1, true);
+            //Debug.DrawRay(lookingPosition, gameObject.transform.forward * Range, Color.green, 1, true);
 
             if (Physics.Raycast(lookingPosition, gameObject.transform.forward, out hitDirection, Range))
             {
@@ -209,15 +226,7 @@ public class EnemyBehaviour : MonoBehaviour
                 }
 
 
-                if (hitDirection.transform.gameObject.tag == "EnemyTank")
-                {
-
-                    if (hitDirection.transform.gameObject.GetComponent<EnemyBehaviour>().cansee == true)
-                    {
-                       StartCoroutine(rotateAngle());
-
-                    }
-                }
+                
 
 
             }
@@ -232,7 +241,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
- IEnumerator getIdleDetination()
+    IEnumerator getIdleDetination()
     {
         repathingLimiter = false;
 
@@ -242,6 +251,7 @@ public class EnemyBehaviour : MonoBehaviour
         repathingLimiter = true;
 
     }
+
     IEnumerator rotateAngle()
     {
         if (rotateWait)
@@ -260,9 +270,11 @@ public class EnemyBehaviour : MonoBehaviour
             relocatetargets.Add(RELOCATE2trans);
             relocatetargets.Add(RELOCATE3trans);
 
+            agent.stoppingDistance = 0;
             agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
+            agent.stoppingDistance = 30;
             rotateWait = true;
         }
 
@@ -321,7 +333,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 
 
-        IEnumerator fireBullet()
+    IEnumerator fireBullet()
     {
         reload = true;
 
@@ -415,7 +427,7 @@ public class EnemyBehaviour : MonoBehaviour
                 {
                     Destroy(other.transform.gameObject);
 
-                    Health -= 10;
+                    Health -= 5;
                     HealthBar.value = Health;
                     DeathCheck();
 
@@ -425,7 +437,7 @@ public class EnemyBehaviour : MonoBehaviour
                 if (other.tag == "missile")
                 {
                     Destroy(other.transform.gameObject);
-                    Health -= 70;
+                    Health -= 100;
                     HealthBar.value = Health;
                     DeathCheck();
                 }
@@ -433,7 +445,7 @@ public class EnemyBehaviour : MonoBehaviour
                 if (other.tag == "Rocket")
                 {
                     Destroy(other.transform.gameObject);
-                    Health -= 10;
+                    Health -= 5;
                     HealthBar.value = Health;
                     DeathCheck();
                 }
@@ -445,7 +457,7 @@ public class EnemyBehaviour : MonoBehaviour
                 {
                     Destroy(other.transform.gameObject);
 
-                    Health -= 10;
+                    Health -= 5;
                     HealthBar.value = Health;
                     DeathCheck();
 
@@ -455,7 +467,7 @@ public class EnemyBehaviour : MonoBehaviour
                 if (other.tag == "missile")
                 {
                     Destroy(other.transform.gameObject);
-                    Health -= 10;
+                    Health -= 5;
                     HealthBar.value = Health;
                     DeathCheck();
                 }
@@ -463,7 +475,7 @@ public class EnemyBehaviour : MonoBehaviour
                 if (other.tag == "Rocket")
                 {
                     Destroy(other.transform.gameObject);
-                    Health -= 70;
+                    Health -= 100;
                     HealthBar.value = Health;
                     DeathCheck();
                 }
@@ -474,7 +486,7 @@ public class EnemyBehaviour : MonoBehaviour
                 {
                     Destroy(other.transform.gameObject);
 
-                    Health -= 70;
+                    Health -= 100;
                     HealthBar.value = Health;
                     DeathCheck();
 
@@ -484,7 +496,7 @@ public class EnemyBehaviour : MonoBehaviour
                 if (other.tag == "missile")
                 {
                     Destroy(other.transform.gameObject);
-                    Health -= 10;
+                    Health -= 5;
                     HealthBar.value = Health;
                     DeathCheck();
                 }
@@ -492,7 +504,7 @@ public class EnemyBehaviour : MonoBehaviour
                 if (other.tag == "Rocket")
                 {
                     Destroy(other.transform.gameObject);
-                    Health -= 10;
+                    Health -= 5;
                     HealthBar.value = Health;
                     DeathCheck();
                 }
@@ -503,7 +515,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 
 
-        public void DeathCheck()
+    public void DeathCheck()
         {
 
             if (Health <= 0)
@@ -521,7 +533,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
 
-        public void AssignSpheres()
+    public void AssignSpheres()
         {
 
             Sphere = manager.CaptainSpheres[Random.Range(0, 3)];

@@ -8,6 +8,9 @@ using System.Collections;
 
 public class Targeting : MonoBehaviour
 {
+
+    
+
     // Start is called before the first frame update
 
     public float rotationSpeed = 1.0f;
@@ -31,7 +34,7 @@ public class Targeting : MonoBehaviour
 
     private Vector3 lookingPosition;
 
-    public bool cansee;
+    public bool cansee = false;
     public bool rotateWait;
 
     public GameObject Bullet;
@@ -71,6 +74,9 @@ public class Targeting : MonoBehaviour
     void Update()
     {
 
+
+        
+
         if (targetLimiter && manager.Enemies.Count() != 0)
         {
 
@@ -91,7 +97,7 @@ public class Targeting : MonoBehaviour
 
             RaycastHit hitDirection;
 
-            lookingPosition = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
+            lookingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
             Debug.DrawRay(lookingPosition, raydirection, Color.yellow, 1, true);
 
@@ -104,7 +110,6 @@ public class Targeting : MonoBehaviour
                     {
 
                         transform.LookAt(new Vector3(closestTarget.transform.position.x, transform.position.y, closestTarget.transform.position.z));
-
                         Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
                         Quaternion rotation = Quaternion.LookRotation(direction);
                         FirePoint.transform.rotation = rotation;
@@ -118,7 +123,25 @@ public class Targeting : MonoBehaviour
                         Vector3 direction = hitEnemey.transform.position - FirePoint.transform.position;
                         Quaternion rotation = Quaternion.LookRotation(direction);
                         FirePoint.transform.rotation = rotation;
-                      
+
+                    
+
+                        if (hitEnemey.transform.gameObject.tag == "Tank" || hitEnemey.transform.gameObject.tag == "Soilder")
+                        {
+
+                            if (cansee == false)
+                            {
+
+                                if (hitEnemey.transform.gameObject.GetComponent<Targeting>().cansee == true)
+                                {
+
+                                    StartCoroutine(rotateAngle());
+
+                                }
+                            }
+                            
+
+                        }
 
 
                     }               
@@ -174,18 +197,6 @@ public class Targeting : MonoBehaviour
                         }
                 }
 
-
-                if (hitDirection.transform.gameObject.tag == "Tank")
-                {
-
-                    if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
-                    {
-                        StartCoroutine(rotateAngle());
-
-                    }
-                }
-                
-
             }
 
 
@@ -202,6 +213,7 @@ public class Targeting : MonoBehaviour
         if (rotateWait)
         {
             rotateWait = false;
+            
 
             relocatetargets.Clear();
 
@@ -215,9 +227,14 @@ public class Targeting : MonoBehaviour
             relocatetargets.Add(RELOCATE2trans);
             relocatetargets.Add(RELOCATE3trans);
 
-            agent.SetDestination(relocatetargets[Random.Range(0, 4)]);
+            agent.stoppingDistance = 0;
+            agent.SetDestination(relocatetargets[0]);
+   
+        
+            
 
-                yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
+            agent.stoppingDistance = 30;
             rotateWait = true;
         }
      

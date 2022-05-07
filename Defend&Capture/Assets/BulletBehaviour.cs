@@ -13,6 +13,14 @@ public class BulletBehaviour : MonoBehaviour
     {
 
         transform.position += transform.forward * Time.deltaTime * movementSpeed;
+        StartCoroutine(destoryOverTime());
+    }
+
+    IEnumerator destoryOverTime()
+    {
+        yield return new WaitForSeconds(3f);
+
+        Destroy(gameObject);
 
     }
 

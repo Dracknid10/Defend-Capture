@@ -33,7 +33,7 @@ public class statManager : MonoBehaviour
     {
         MaxPop = 50;
         CurrentPop = 0;
-        Supplies = 10000050;
+        Supplies = 150;
 
     }
 

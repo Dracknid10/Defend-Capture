@@ -23,7 +23,7 @@ public class cameracontroller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
 
-            speedZ = 150f;
+            speedZ = 200f;
 
         }
         if (Input.GetKeyUp(KeyCode.W))
@@ -37,7 +37,7 @@ public class cameracontroller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
 
-            speedZ = -150f;
+            speedZ = -200f;
 
         }
         if (Input.GetKeyUp(KeyCode.S))
@@ -51,7 +51,7 @@ public class cameracontroller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
 
-            speedX = -150f;
+            speedX = -200f;
 
         }
         if (Input.GetKeyUp(KeyCode.A))
@@ -65,7 +65,7 @@ public class cameracontroller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
 
-            speedX = 150f;
+            speedX = 200f;
 
         }
         if (Input.GetKeyUp(KeyCode.D))

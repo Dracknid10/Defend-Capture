@@ -381,18 +381,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 1622342563750156351}
   manager: {fileID: 0}
+  gameover: {fileID: 0}
   Sphere: {fileID: 0}
   SphereManger: {fileID: 0}
   TargetingManager: {fileID: 0}
+  spawner: {fileID: 0}
   EnemiesInRange: []
   CloseAllies: []
   relocatetargets: []
   closestTarget: {fileID: 0}
   targetLimiter: 0
+  repathingLimiter: 0
   cansee: 0
   movingInRange: 0
   Bullet: {fileID: 1812173538134816709, guid: 938342f21bb232149a85278cea9c0ad2, type: 3}
   FirePoint: {fileID: 1737934013817014139}
+  rotateWait: 0
   RELOCATE0: {fileID: 0}
   RELOCATE1: {fileID: 0}
   RELOCATE2: {fileID: 0}
@@ -631,17 +635,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6607185901777140287}
-  m_LocalRotation: {x: -0.38548192, y: -0, z: -0, w: 0.92271537}
-  m_LocalPosition: {x: 0, y: 0, z: -0.65}
+  m_LocalRotation: {x: -0.6117981, y: -0, z: -0, w: 0.79101396}
+  m_LocalPosition: {x: 0, y: 0, z: -0.6319784}
   m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
   m_Children:
   - {fileID: 5699076711363700094}
   m_Father: {fileID: 3878721549364925041}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -45.347, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -75.439, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.26, y: 4.62}
+  m_AnchoredPosition: {x: 0.2599996, y: 4.651632}
   m_SizeDelta: {x: 6.5054, y: 2.2168}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7232088676540621766

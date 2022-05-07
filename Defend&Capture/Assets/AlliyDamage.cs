@@ -21,7 +21,7 @@ public class AlliyDamage : MonoBehaviour
         gameover = GameObject.FindGameObjectWithTag("gameOverManager").GetComponent<GameOver>();
         stat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
 
-        Health = 300f;
+        Health = 500f;
        
         if (gameObject.tag == "PlayerBase")
         {
@@ -36,28 +36,31 @@ public class AlliyDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
    
-        if (gameObject.tag == "PlayerBase" && other.tag == "bullet" || other.tag == "missile" || other.tag == "Rocket")
+        if (gameObject.tag == "PlayerBase")
         {
-
-            Health -= 10;
-            HealthBar.value = Health;
-            if (Health <= 0)
+            if (other.tag == "bullet" || other.tag == "missile" || other.tag == "Rocket")
             {
-                gameover.AIWon = true;
+                Destroy(other.transform.gameObject);
+                Health -= 10;
+                HealthBar.value = Health;
+                Debug.Log(Health);
+
+
+                if (Health <= 0)
+                {
+                    gameover.AIWon = true;
+
+                }
             }
         }
         
-
-
-
-
         if (gameObject.tag == "Soilder")
         {
             if (other.tag == "bullet")
             {
                 Destroy(other.transform.gameObject);
 
-                Health -= 10;
+                Health -= 5;
                 HealthBar.value = Health;
                 DeathCheck();
 
@@ -67,7 +70,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "missile")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 70;
+                Health -= 100;
                 HealthBar.value = Health;
                 DeathCheck();
             }
@@ -75,7 +78,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "Rocket")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 10;
+                Health -= 5;
                 HealthBar.value = Health;
                 DeathCheck();
             }
@@ -87,7 +90,7 @@ public class AlliyDamage : MonoBehaviour
             {
                 Destroy(other.transform.gameObject);
 
-                Health -= 10;
+                Health -= 5;
                 HealthBar.value = Health;
                 DeathCheck();
 
@@ -97,7 +100,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "missile")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 10;
+                Health -= 5;
                 HealthBar.value = Health;
                 DeathCheck();
             }
@@ -105,7 +108,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "Rocket")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 70;
+                Health -= 100;
                 HealthBar.value = Health;
                 DeathCheck();
             }
@@ -116,7 +119,7 @@ public class AlliyDamage : MonoBehaviour
             {
                 Destroy(other.transform.gameObject);
 
-                Health -= 70;
+                Health -= 100;
                 HealthBar.value = Health;
                 DeathCheck();
 
@@ -126,7 +129,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "missile")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 10;
+                Health -= 5;
                 HealthBar.value = Health;
                 DeathCheck();
             }
@@ -134,7 +137,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "Rocket")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 10;
+                Health -= 5;
                 HealthBar.value = Health;
                 DeathCheck();
             }

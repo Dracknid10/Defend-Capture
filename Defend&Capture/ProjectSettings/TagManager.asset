@@ -35,6 +35,7 @@ TagManager:
   - PlayerBase
   - EnemyBase
   - gameOverManager
+  - Spawner
   layers:
   - Default
   - TransparentFX

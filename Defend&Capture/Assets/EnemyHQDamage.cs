@@ -33,14 +33,19 @@ public class EnemyHQDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (gameObject.tag == "EnemyBase" && other.tag == "bullet" || other.tag == "missile" || other.tag == "Rocket")
+        if (gameObject.tag == "EnemyBase")
         {
 
-            Health -= 10;
-            HealthBar.value = Health;
-            if (Health <= 0)
+            if (other.tag == "bullet" || other.tag == "missile" || other.tag == "Rocket")
             {
-                gameover.playerWon = true;
+                Destroy(other.transform.gameObject);
+                Health -= 10;
+                HealthBar.value = Health;
+                if (Health <= 0)
+                {
+                  
+                    gameover.playerWon = true;
+                }
             }
 
         }

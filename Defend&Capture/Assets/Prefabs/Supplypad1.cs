@@ -38,7 +38,7 @@ public class Supplypad1 : MonoBehaviour
     {
 
         addgap = true;   
-        manager.addsupplies(20);
+        manager.addsupplies(50);
         yield return new WaitForSeconds(1);
         addgap = false;
 

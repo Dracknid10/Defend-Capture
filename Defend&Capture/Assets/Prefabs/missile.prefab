@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 386073359309063335}
   - component: {fileID: 1070915440922653208}
   - component: {fileID: 4508409459866196558}
-  - component: {fileID: 4935930911601595219}
   m_Layer: 8
   m_Name: missile
   m_TagString: missile
@@ -107,18 +106,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.066178165, y: 0.0661782, z: 0.27574235}
-  m_Center: {x: 0, y: -0.000000016763806, z: 0.13787118}
---- !u!65 &4935930911601595219
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863923329645480517}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.066178165, y: 0.0661782, z: 0.27574235}
-  m_Center: {x: 0, y: -0.000000016763806, z: 0.13787118}
+  m_Size: {x: 0.05426744, y: 0.04736941, z: 0.27574235}
+  m_Center: {x: -0.0015121619, y: 0.0026072315, z: 0.13787118}

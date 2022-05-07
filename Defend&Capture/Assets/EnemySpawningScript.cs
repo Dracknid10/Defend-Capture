@@ -12,19 +12,25 @@ public class EnemySpawningScript : MonoBehaviour
     public GameObject Spawn;
     public GameObject HeliSpawn;
 
-    public int allySoldiers;
-    public int allyTanks;
-    public int allyHelis;
+    public int PlayerSoldiers;
+    public int PlayerTanks;
+    public int PlayerHelis;
+
+    public int Soldiers;
+    public int Tanks;
+    public int Helis;
 
     private bool poweredup;
     private bool UnitWait;
 
     private bool ArmyAnalyseWait = true;
 
+
+    private bool SpawnTime = true;
     public float population;
     public arrayofSelectedTroops troopList;
 
-    private bool InitialWaitTime = false;
+    private bool InitialWaitTime = true;
 
     void Start()
     {
@@ -35,6 +41,7 @@ public class EnemySpawningScript : MonoBehaviour
         poweredup = false;
         StartCoroutine(powerup());
         StartCoroutine(powerup());
+        StartCoroutine(StartArmy());
         UnitWait = true;
 
 
@@ -45,45 +52,82 @@ public class EnemySpawningScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (InitialWaitTime == false)
+        {
+            StartCoroutine(AnalyseArmy());
+            StartCoroutine(AiCounter());
+        }
 
+
+
+
+
+
+    }
+
+
+    IEnumerator StartArmy()
+    {
         if (InitialWaitTime == true)
         {
-            StartCoroutine(InitialArmy());
+
+            yield return new WaitForSeconds(50);
+
+
+            for (int i = 0; i < 20; i++)
+            {
+                StartCoroutine(CreateUnit(solider, Spawn));
+                yield return new WaitForSeconds(2);
+            }
+
+            InitialWaitTime = false;
         }
-        //StartCoroutine(AnalyseArmy());
+       
 
-   
-
-
+        
     }
-    IEnumerator InitialWait()
-    {
-        yield return new WaitForSeconds(20);
-        InitialWaitTime = true;
 
-    }
-    IEnumerator InitialArmy()
+    IEnumerator AiCounter()
     {
-
-        for (int i = 0; i < 20; i++)
+        if (SpawnTime)
         {
-            StartCoroutine(CreateUnit(solider, Spawn));
-            yield return new WaitForSeconds(1);
+            SpawnTime = false;
+            int biggest = Mathf.Max(Mathf.Max(PlayerSoldiers, PlayerHelis), PlayerTanks);
+
+            if (PlayerSoldiers == biggest)
+            {
+                StartCoroutine(CreateUnit(Tank, Spawn));
+            }
+            if (PlayerHelis == biggest)
+            {
+                StartCoroutine(CreateUnit(solider, Spawn));
+            }
+            if (PlayerTanks == biggest)
+            {
+                StartCoroutine(CreateUnit(Heli, HeliSpawn));
+            }
+
+            yield return new WaitForSeconds(2);
+            SpawnTime = true;
+
         }
+
+
+
 
        
-        
-
     }
+
+
     IEnumerator AnalyseArmy()
     {
         if (ArmyAnalyseWait)
         {
             ArmyAnalyseWait = false;
 
-            allySoldiers = 0;
-            allyTanks = 0;
-            allyHelis = 0;
+            PlayerSoldiers = 0;
+            PlayerTanks = 0;
+            PlayerHelis = 0;
 
             for (int i = 0; i < troopList.AllTroops.Count; i++)
             {
@@ -93,15 +137,15 @@ public class EnemySpawningScript : MonoBehaviour
 
                     if (troopList.AllTroops[i].gameObject.tag == "Soilder")
                     {
-                        allySoldiers++;
+                        PlayerSoldiers++;
                     }
                     if (troopList.AllTroops[i].gameObject.tag == "Tank")
                     {
-                        allyTanks++;
+                        PlayerTanks++;
                     }
                     if (troopList.AllTroops[i].gameObject.tag == "Heli")
                     {
-                        allyHelis++;
+                        PlayerHelis++;
                     }
 
 
@@ -121,14 +165,32 @@ public class EnemySpawningScript : MonoBehaviour
 
     IEnumerator CreateUnit( GameObject type, GameObject spawn)
     {
-        UnitWait = false;
+        
 
+        if (population <= 50)
+        {
+            UnitWait = false;
+            Instantiate(type, spawn.transform.position, Quaternion.identity);
+            population = population + 1;
 
-       Instantiate(type, spawn.transform.position, Quaternion.identity);
-        population = population + 1;
+            if (type.gameObject.tag == "EnemySoldier")
+            {
+                Soldiers++;
+            }
+            if (type.gameObject.tag == "EnemyTank")
+            {
+                Tanks++;
+            }
+            if (type.gameObject.tag == "EnemyHeli")
+            {
+                Helis++;
+            }
 
-        yield return new WaitForSeconds(2);
-        UnitWait = true;
+            yield return new WaitForSeconds(4);
+            UnitWait = true;
+        }
+
+    
 
     }
 
