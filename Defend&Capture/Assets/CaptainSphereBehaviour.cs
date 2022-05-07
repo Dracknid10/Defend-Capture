@@ -63,6 +63,7 @@ public class CaptainSphereBehaviour : MonoBehaviour
                 }
             }
             else { agent.SetDestination(manager.PatrolPoints[Random.Range(0, manager.PatrolPoints.Count)].transform.position); }
+          
 
         }
        

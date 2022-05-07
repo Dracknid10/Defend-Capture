@@ -12,44 +12,123 @@ public class EnemySpawningScript : MonoBehaviour
     public GameObject Spawn;
     public GameObject HeliSpawn;
 
+    public int allySoldiers;
+    public int allyTanks;
+    public int allyHelis;
 
     private bool poweredup;
-    private bool SoilderWait;
+    private bool UnitWait;
 
-    private bool TroopwaitWait;
-    private bool HeliWait;
-    private bool TankWait;
+    private bool ArmyAnalyseWait = true;
 
-    private float population;
+    public float population;
+    public arrayofSelectedTroops troopList;
+
+    private bool InitialWaitTime = false;
 
     void Start()
     {
+
+        troopList = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
+
         population = 0f;
         poweredup = false;
-        SoilderWait = false;
         StartCoroutine(powerup());
-        StartCoroutine(troopWait());
-        SoilderWait = true;
-        HeliWait = false;
-        TankWait = false;
+        StartCoroutine(powerup());
+        UnitWait = true;
+
+
+       
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (SoilderWait && population < 50)
+        if (InitialWaitTime == true)
         {
-            StartCoroutine(CreateSolider());
-            
+            StartCoroutine(InitialArmy());
         }
+        //StartCoroutine(AnalyseArmy());
+
+   
 
 
     }
-    IEnumerator troopWait()
+    IEnumerator InitialWait()
     {
-        yield return new WaitForSeconds(30);
-        SoilderWait = true;
+        yield return new WaitForSeconds(20);
+        InitialWaitTime = true;
+
+    }
+    IEnumerator InitialArmy()
+    {
+
+        for (int i = 0; i < 20; i++)
+        {
+            StartCoroutine(CreateUnit(solider, Spawn));
+            yield return new WaitForSeconds(1);
+        }
+
+       
+        
+
+    }
+    IEnumerator AnalyseArmy()
+    {
+        if (ArmyAnalyseWait)
+        {
+            ArmyAnalyseWait = false;
+
+            allySoldiers = 0;
+            allyTanks = 0;
+            allyHelis = 0;
+
+            for (int i = 0; i < troopList.AllTroops.Count; i++)
+            {
+
+                if (troopList.AllTroops[i] != null)
+                {
+
+                    if (troopList.AllTroops[i].gameObject.tag == "Soilder")
+                    {
+                        allySoldiers++;
+                    }
+                    if (troopList.AllTroops[i].gameObject.tag == "Tank")
+                    {
+                        allyTanks++;
+                    }
+                    if (troopList.AllTroops[i].gameObject.tag == "Heli")
+                    {
+                        allyHelis++;
+                    }
+
+
+
+
+                }
+
+
+            }
+        }
+
+
+
+        yield return new WaitForSeconds(10);
+        ArmyAnalyseWait = true;
+    }
+
+    IEnumerator CreateUnit( GameObject type, GameObject spawn)
+    {
+        UnitWait = false;
+
+
+       Instantiate(type, spawn.transform.position, Quaternion.identity);
+        population = population + 1;
+
+        yield return new WaitForSeconds(2);
+        UnitWait = true;
 
     }
 
@@ -59,32 +138,5 @@ public class EnemySpawningScript : MonoBehaviour
         poweredup = true;
 
     }
-    IEnumerator CreateSolider()
-    {
-        SoilderWait = false;
 
-
-       Instantiate(solider, Spawn.transform.position, Quaternion.identity);
-        population = population + 1;
-
-        yield return new WaitForSeconds(1);
-        SoilderWait = true;
-
-    }
-    IEnumerator CreateHeli()
-    {
-
-
-        yield return new WaitForSeconds(5);
-        HeliWait = true;
-
-    }
-    IEnumerator CreateTank()
-    {
-
-
-        yield return new WaitForSeconds(5);
-        TankWait = true;
-
-    }
 }

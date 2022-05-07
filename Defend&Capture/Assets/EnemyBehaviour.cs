@@ -19,7 +19,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 
     public arrayofSelectedTroops TargetingManager;
-
+    public EnemySpawningScript spawner;
 
     public List<GameObject> EnemiesInRange = new List<GameObject>();
     public List<GameObject> CloseAllies = new List<GameObject>();
@@ -62,6 +62,7 @@ public class EnemyBehaviour : MonoBehaviour
         TargetingManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
         gameover = GameObject.FindGameObjectWithTag("gameOverManager").GetComponent<GameOver>();
         manager.Enemies.Add(gameObject);
+        spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawningScript>();
 
         Asigned = false;
         movingInRange = false;
@@ -213,7 +214,7 @@ public class EnemyBehaviour : MonoBehaviour
 
                     if (hitDirection.transform.gameObject.GetComponent<EnemyBehaviour>().cansee == true)
                     {
-                        StartCoroutine(rotateAngle());
+                       StartCoroutine(rotateAngle());
 
                     }
                 }
@@ -511,7 +512,7 @@ public class EnemyBehaviour : MonoBehaviour
                 manager.Enemies.Remove(gameObject);
                 Destroy(gameObject);
                 gameover.EnemiesKilled = gameover.EnemiesKilled + 1;
-
+                spawner.population = spawner.population - 1;
 
 
             }
@@ -523,7 +524,7 @@ public class EnemyBehaviour : MonoBehaviour
         public void AssignSpheres()
         {
 
-            Sphere = manager.CaptainSpheres[Random.Range(0, manager.CaptainSpheres.Count)];
+            Sphere = manager.CaptainSpheres[Random.Range(0, 3)];
 
             Sphere.gameObject.GetComponent<CaptainSphereBehaviour>().SubForces.Add(gameObject);
 
