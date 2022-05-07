@@ -77,6 +77,7 @@ public class EnemySpawningScript : MonoBehaviour
             for (int i = 0; i < 20; i++)
             {
                 StartCoroutine(CreateUnit(solider, Spawn));
+               
                 yield return new WaitForSeconds(2);
             }
 
@@ -171,7 +172,7 @@ public class EnemySpawningScript : MonoBehaviour
         {
             UnitWait = false;
             Instantiate(type, spawn.transform.position, Quaternion.identity);
-            population = population + 1;
+            population++;
 
             if (type.gameObject.tag == "EnemySoldier")
             {

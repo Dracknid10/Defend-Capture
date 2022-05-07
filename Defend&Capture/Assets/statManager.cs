@@ -45,6 +45,10 @@ public class statManager : MonoBehaviour
         UIReactorLVL.text = reactorLvl.ToString();
         UIPopualtion.text = CurrentPop.ToString() + "/50";
 
+        if (CurrentPop < -1)
+        {
+            CurrentPop = 0;
+        }
 
     }
 

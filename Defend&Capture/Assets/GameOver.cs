@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameOver : MonoBehaviour
@@ -84,7 +85,7 @@ public class GameOver : MonoBehaviour
 
 
 
-        IEnumerator timercount()
+    IEnumerator timercount()
     {
 
         timer = false;
@@ -105,7 +106,14 @@ public class GameOver : MonoBehaviour
 
 
 
+    public void returntoMainMenu()
+    {
 
+
+        SceneManager.LoadScene("MainMenu");
+
+
+    }
 
 
 

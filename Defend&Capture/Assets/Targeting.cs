@@ -183,8 +183,18 @@ public class Targeting : MonoBehaviour
 
             if (Physics.Raycast(lookingPosition, gameObject.transform.forward, out hitDirection, Range))
             {
-               
 
+                if (hitDirection.transform.gameObject.tag == "Heli")
+                {
+
+
+                    if (hitDirection.transform.gameObject.GetComponent<Targeting>().cansee == true)
+                    {
+
+                        StartCoroutine(rotateAngle());
+
+                    }
+                }
                 if (hitDirection.transform.gameObject.tag == "Soilder")
                 {
                         

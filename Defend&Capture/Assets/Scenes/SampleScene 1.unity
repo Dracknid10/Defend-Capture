@@ -1373,15 +1373,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5201721924288162827, guid: 08218cbec5082794ea670641812e8b38, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 496.66464
+      value: -47.9
       objectReference: {fileID: 0}
     - target: {fileID: 5201721924288162827, guid: 08218cbec5082794ea670641812e8b38, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 357.4
+      value: 358
       objectReference: {fileID: 0}
     - target: {fileID: 5201721924288162827, guid: 08218cbec5082794ea670641812e8b38, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -236
+      value: -370.7
       objectReference: {fileID: 0}
     - target: {fileID: 5201721924288162827, guid: 08218cbec5082794ea670641812e8b38, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6951,9 +6951,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1172778549}
-        m_TargetAssemblyTypeName: VehicleDepot, Assembly-CSharp
-        m_MethodName: closemenu
+      - m_Target: {fileID: 70442556}
+        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+        m_MethodName: returntoMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

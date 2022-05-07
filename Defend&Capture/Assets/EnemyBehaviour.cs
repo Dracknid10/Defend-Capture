@@ -7,6 +7,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class EnemyBehaviour : MonoBehaviour
 {
+    public ParticleSystem Sparks;
 
     private float Health;
     public Slider HealthBar;
@@ -58,6 +59,8 @@ public class EnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Sparks.Stop();
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
         TargetingManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<arrayofSelectedTroops>();
         gameover = GameObject.FindGameObjectWithTag("gameOverManager").GetComponent<GameOver>();
@@ -157,24 +160,24 @@ public class EnemyBehaviour : MonoBehaviour
                         FirePoint.transform.rotation = rotation;
 
 
-                    if (hitEnemey.transform.gameObject.tag == "EnemyTank" || hitEnemey.transform.gameObject.tag == "EnemySoldier")
-                    {
-
-                        if (cansee == false)
+                        if (hitEnemey.transform.gameObject.tag == "EnemyTank" || hitEnemey.transform.gameObject.tag == "EnemySoldier")
                         {
 
-                            if (hitEnemey.transform.gameObject.GetComponent<EnemyBehaviour>().cansee == true)
+                            if (cansee == false)
                             {
-                                StartCoroutine(rotateAngle());
 
+                                if (hitEnemey.transform.gameObject.GetComponent<EnemyBehaviour>().cansee == true)
+                                {
+                                    StartCoroutine(rotateAngle());
+
+                                }
                             }
+
                         }
 
+
+
                     }
-
-
-
-                }
                     
 
                    
@@ -416,7 +419,7 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-        {
+    {
 
 
         
@@ -510,7 +513,13 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             }
 
+
+        if (Health < Health/3)
+        {
+            Sparks.Play();
         }
+
+    }
 
 
 
