@@ -11,13 +11,28 @@ public class cameracontroller : MonoBehaviour
 
     public float panBorderThickness = 10f;
 
+    private Vector3 startPos;
+
+
+    void Start()
+    {
+        startPos = gameObject.transform.position;
+    }
+
+
 
     void Update()
     {
 
         transform.Translate(speedX * Time.deltaTime, 0 , speedZ * Time.deltaTime, Space.Self);
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
 
+            gameObject.transform.position = startPos;
+            
+
+        }
 
 
         if (Input.GetKeyDown(KeyCode.W))
