@@ -46,6 +46,16 @@ public class CaptainSphereBehaviour : MonoBehaviour
     public void GetDestination()
     {
 
+        //for (int i = 0; i < SubForces.Count; i++)
+        //{
+        //    if (SubForces[i] == null)
+        //    {
+
+        //        SubForces.Remove(SubForces[i]);
+
+        //    }
+        //}
+
 
         for (int i = 0; i < SubForces.Count; i++)
         {
@@ -54,15 +64,19 @@ public class CaptainSphereBehaviour : MonoBehaviour
                 if (SubForces[i].GetComponent<EnemyBehaviour>().cansee)
                 {
                     agent.SetDestination(SubForces[i].transform.position);
-
+                    break;
                 }
                 else 
                 { 
                     agent.SetDestination(manager.PatrolPoints[Random.Range(0, manager.PatrolPoints.Count)].transform.position); 
                 
                 }
+
             }
-            else { agent.SetDestination(manager.PatrolPoints[Random.Range(0, manager.PatrolPoints.Count)].transform.position); }
+            else 
+            { 
+                agent.SetDestination(manager.PatrolPoints[Random.Range(0, manager.PatrolPoints.Count)].transform.position); 
+            }
           
 
         }

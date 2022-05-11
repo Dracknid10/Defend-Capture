@@ -16,7 +16,7 @@ public class Targeting : MonoBehaviour
     public float rotationSpeed = 1.0f;
 
     public List<GameObject> EnemiesInRange = new List<GameObject>();
-    public statManager manager;
+    
     public bool targetLimiter;
     public GameObject closestTarget;
     private float Range = 150;
@@ -47,6 +47,8 @@ public class Targeting : MonoBehaviour
 
 
     NavMeshAgent agent;
+
+    public statManager manager;
 
     void Start()
     {
@@ -239,9 +241,6 @@ public class Targeting : MonoBehaviour
 
             agent.stoppingDistance = 0;
             agent.SetDestination(relocatetargets[0]);
-   
-        
-            
 
             yield return new WaitForSeconds(5f);
             agent.stoppingDistance = 30;
@@ -267,8 +266,8 @@ public class Targeting : MonoBehaviour
 
 
 
-        IEnumerator getTargets()
-        {
+    IEnumerator getTargets()
+    {
             targetLimiter = false;
 
             EnemiesInRange.Clear();

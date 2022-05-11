@@ -187,7 +187,7 @@ public class EnemySpawningScript : MonoBehaviour
                 Helis++;
             }
 
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(2);
             UnitWait = true;
         }
 

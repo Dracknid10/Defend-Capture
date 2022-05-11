@@ -43,7 +43,7 @@ public class AlliyDamage : MonoBehaviour
                 Destroy(other.transform.gameObject);
                 Health -= 10;
                 HealthBar.value = Health;
-                Debug.Log(Health);
+               
 
 
                 if (Health <= 0)
@@ -60,7 +60,7 @@ public class AlliyDamage : MonoBehaviour
             {
                 Destroy(other.transform.gameObject);
 
-                Health -= 5;
+                Health -= 50;
                 HealthBar.value = Health;
                 DeathCheck();
 
@@ -78,7 +78,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "Rocket")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 5;
+                Health -= 50;
                 HealthBar.value = Health;
                 DeathCheck();
             }
@@ -90,7 +90,7 @@ public class AlliyDamage : MonoBehaviour
             {
                 Destroy(other.transform.gameObject);
 
-                Health -= 5;
+                Health -= 50;
                 HealthBar.value = Health;
                 DeathCheck();
 
@@ -100,7 +100,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "missile")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 5;
+                Health -= 50;
                 HealthBar.value = Health;
                 DeathCheck();
             }
@@ -129,7 +129,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "missile")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 5;
+                Health -= 50;
                 HealthBar.value = Health;
                 DeathCheck();
             }
@@ -137,7 +137,7 @@ public class AlliyDamage : MonoBehaviour
             if (other.tag == "Rocket")
             {
                 Destroy(other.transform.gameObject);
-                Health -= 5;
+                Health -= 50;
                 HealthBar.value = Health;
                 DeathCheck();
             }
