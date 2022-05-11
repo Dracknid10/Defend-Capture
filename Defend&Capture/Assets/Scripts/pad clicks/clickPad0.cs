@@ -105,7 +105,7 @@ public class clickPad0 : MonoBehaviour
         yield return new WaitForSeconds(5);
         GameObject Building = (GameObject)Instantiate(SupplyPadLVL1);
         Building.transform.position = spawnPos;
-        
+        Building.GetComponentInChildren<Supplypad1>().PadOn = gameObject;
         
     }
 
@@ -125,7 +125,8 @@ public class clickPad0 : MonoBehaviour
         yield return new WaitForSeconds(5);
         GameObject Building = (GameObject)Instantiate(ReactorLVL1);
         Building.transform.position = spawnPos;
-       
+        Building.GetComponentInChildren<reactor1>().PadOn = gameObject;
+
 
     }
 
