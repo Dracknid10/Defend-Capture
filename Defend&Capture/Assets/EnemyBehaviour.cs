@@ -107,10 +107,9 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+      
     
-
-       
-
         if (Asigned == false)
         {
             Asigned = true;     //unit is asigned to a sphere only once
@@ -118,19 +117,20 @@ public class EnemyBehaviour : MonoBehaviour
         }
     
 
-        if (cansee == false && movingInRange == false && targetLimiter == true && closestTarget == null)
-        {
-
-            StartCoroutine(getIdleDetination());    //it will get a desination of its captain sphere if its not moving into range of a player troop and it cant currently see one and it hasnt reccently done it and it has no targets in range
-
-        }
+ 
         if (targetLimiter && TargetingManager.AllTroops.Count != 0)
         {
 
 
             StartCoroutine(getTargets());       //if it hasnt done these reccently and the current player troop count = 0 itll get targets in range
             StartCoroutine(getCloseAllies());   //gets close allies
+            
 
+        }
+        if (cansee == false && movingInRange == false && closestTarget == null)
+        {
+
+            StartCoroutine(getIdleDetination());    //it will get a desination of its captain sphere if its not moving into range of a player troop and it cant currently see one and it hasnt reccently done it and it has no targets in range
 
         }
         if (closestTarget != null)
@@ -164,8 +164,6 @@ public class EnemyBehaviour : MonoBehaviour
                         
                     }
 
-                    
-
                     if (gameObject.tag == "EnemyTank")
                     {
 
@@ -196,10 +194,6 @@ public class EnemyBehaviour : MonoBehaviour
 
                     }
 
-
-                
-
-
                 if (hitEnemey.transform.gameObject.tag == "Soilder" ||
                     hitEnemey.transform.gameObject.tag == "Tank" ||
                     hitEnemey.transform.gameObject.tag == "Heli" ||         //if the unit can see an enemy its cansee value is set to true otherwise it is false
@@ -207,7 +201,7 @@ public class EnemyBehaviour : MonoBehaviour
                 {
 
                     cansee = true;
-                   
+                    agent.ResetPath();
                 }
                 else 
                 { 
@@ -226,11 +220,7 @@ public class EnemyBehaviour : MonoBehaviour
                 {
                     StartCoroutine(fireBullet());   //units will start shooting if they can see an enemy and they've taken the time to reload
                 }
-
-
             }
-
-            
 
             //lookingPosition = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
 
@@ -255,29 +245,25 @@ public class EnemyBehaviour : MonoBehaviour
 
             //}
 
-
-           
-
-
         }
         else { cansee = false; } //if the ray misses everything they cant see anything
-
-
     }
 
     IEnumerator getIdleDetination()
     {
 
+        if (cansee == false || closestTarget == null)
+        {
+            agent.SetDestination(Sphere.transform.position);
+        }
+            
+            //if the unit cannot see a unit it will attempt to follow its commander
+            //the update funciton then follows with a method that see if a close ally can see in wtich the setdestinaiton is replaced wth tring to get in range of the enemy its ally can see
+            yield return new WaitForSeconds(2f);
 
-        repathingLimiter = false;
+            repathingLimiter = true;
 
-       
-        agent.SetDestination(Sphere.transform.position); 
-        //if the unit cannot see a unit it will attempt to follow its commander
-        //the update funciton then follows with a method that see if a close ally can see in wtich the setdestinaiton is replaced wth tring to get in range of the enemy its ally can see
-        yield return new WaitForSeconds(2f);
-
-        repathingLimiter = true;
+        
 
     }
 
@@ -348,6 +334,7 @@ public class EnemyBehaviour : MonoBehaviour
                     if (CloseAllies[i].GetComponent<EnemyBehaviour>().cansee == true && cansee == false && CloseAllies[i] != null) //if it cant see an enemy but a ally can AND the unit that can see still exists
                     {
                       
+                        Debug.Log("hit");
                             agent.stoppingDistance = Range -50; //gets in ranger but without getting up too close
                             movingInRange = true; //while this is true the unit wont follow its captain and will try to fight instead
                             agent.SetDestination(CloseAllies[i].GetComponent<EnemyBehaviour>().closestTarget.transform.position); // moves closer to enemy
@@ -438,7 +425,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         }
 
-        yield return new WaitForSeconds(2); //do this every 2 seconds
+        yield return new WaitForSeconds(5); //do this every 2 seconds
 
 
         targetLimiter = true;

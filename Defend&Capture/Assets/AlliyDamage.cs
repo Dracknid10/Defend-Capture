@@ -21,7 +21,7 @@ public class AlliyDamage : MonoBehaviour
         gameover = GameObject.FindGameObjectWithTag("gameOverManager").GetComponent<GameOver>();
         stat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<statManager>();
 
-        Health = 500f;
+        Health = 5000000f;
        
         if (gameObject.tag == "PlayerBase")
         {
