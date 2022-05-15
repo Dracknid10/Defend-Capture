@@ -31,9 +31,9 @@ public class statManager : MonoBehaviour
 
     void Start()
     {
-        MaxPop = 50;
-        CurrentPop = 0;
-        Supplies = 150;
+        MaxPop = 50;    //to limit the size of an army - saves on computing power
+        CurrentPop = 0;         //default starting values
+        Supplies = 150;     //supply pads are 150 and are the cheapest building - the player can only build a supply pad first
 
     }
 
@@ -42,12 +42,12 @@ public class statManager : MonoBehaviour
     {
 
         UIsupplies.text = Supplies.ToString();
-        UIReactorLVL.text = reactorLvl.ToString();
+        UIReactorLVL.text = reactorLvl.ToString();              // updates the UI with the above values
         UIPopualtion.text = CurrentPop.ToString() + "/50";
 
-        if (CurrentPop < -1)
+        if (CurrentPop < 0)
         {
-            CurrentPop = 0;
+            CurrentPop = 0;     //error handeling
         }
 
     }
@@ -65,8 +65,8 @@ public class statManager : MonoBehaviour
     public int addsupplies(int suppliesToAdd)
     {
 
-        Supplies = Supplies + suppliesToAdd;
-
+        Supplies = Supplies + suppliesToAdd;        //supply pads will call this and add supplies
+            
 
         return 0;
     }
@@ -74,7 +74,7 @@ public class statManager : MonoBehaviour
     public void addreactorlvl()
     {
 
-        reactorLvl = reactorLvl + 1;
+        reactorLvl = reactorLvl + 1;        //reactors call this once - only 1 power is needed to unlock more buildings
 
     }
 }

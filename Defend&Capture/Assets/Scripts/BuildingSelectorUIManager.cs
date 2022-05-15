@@ -102,6 +102,7 @@ public class BuildingSelectorUIManager : MonoBehaviour //IPointerEnterHandler, I
 
     }
 
+    //when the cursor enters the buttons the menu changes to display what buying the building does to supplies and what it gives access to
   
     public void barrackstext()
     {
@@ -136,13 +137,16 @@ public class BuildingSelectorUIManager : MonoBehaviour //IPointerEnterHandler, I
     }
 
 
+    // when the coresponding button is clicked it sends the string to PadManager so it know which building the player is looking at to spawn
+
+
     public void BuildBarracks()
     {
 
         
 
-        pass.selectedBuilding("Barracks");
-        pass.BuildBuilding();
+        pass.selectedBuilding("Barracks"); //saves what building the player wants to build when button is clicked
+        pass.BuildBuilding();   //padmanager checks if there is enough supplies and there isnt a building already there (if somehow the building menu appears if the building is already full)
 
     }
 
@@ -182,11 +186,11 @@ public class BuildingSelectorUIManager : MonoBehaviour //IPointerEnterHandler, I
     {
 
         pass.selectedBuilding("");
-        pass.selectedpad(null);
+        pass.selectedpad(null);     //resets the pad managers variables for which building and which pad to avoid errors
 
         
         UiAnimation.SetBool("Ui On", false);
-        UiAnimation.SetBool("Ui Off", true);
+        UiAnimation.SetBool("Ui Off", true);          //the UI is closed and disapears of screen
 
 
     }
