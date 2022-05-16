@@ -777,7 +777,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   EnemiesInRange: []
-  manager: {fileID: 0}
   targetLimiter: 0
   closestTarget: {fileID: 0}
   selector: {fileID: 0}
@@ -795,6 +794,7 @@ MonoBehaviour:
   FirePoint: {fileID: 7185125550188377644}
   Turret: {fileID: 0}
   relocatetargets: []
+  manager: {fileID: 0}
 --- !u!1 &5720426704837698380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +1027,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7185125550188377644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.052, y: -0.869, z: 4.48}
+  m_LocalPosition: {x: 0.052, y: -3.7, z: 4.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5655163146560791334}

@@ -15,16 +15,16 @@ public class Targeting : MonoBehaviour
 
     public float rotationSpeed = 1.0f;
 
-    public List<GameObject> EnemiesInRange = new List<GameObject>();
+    public List<GameObject> EnemiesInRange = new List<GameObject>();        // local list of close targets in range
     
-    public bool targetLimiter;
-    public GameObject closestTarget;
+    public bool targetLimiter;      //for performance
+    public GameObject closestTarget;   
     private float Range = 150;
-    public GameObject selector;
+    public GameObject selector; 
 
     public GameObject RELOCATE0;
     public GameObject RELOCATE1;
-    public GameObject RELOCATE2;
+    public GameObject RELOCATE2;                //gamobjects  ofr relocating around allies  --- thier vector3s change and are re calculated
     public GameObject RELOCATE3;
 
     public Vector3 RELOCATE0trans;
@@ -32,18 +32,18 @@ public class Targeting : MonoBehaviour
     public Vector3 RELOCATE2trans;
     public Vector3 RELOCATE3trans;
 
-    private Vector3 lookingPosition;
+    private Vector3 lookingPosition;    //ray cast origin for looking at closest enemy
 
-    public bool cansee = false;
-    public bool rotateWait;
+    public bool cansee = false; //does the unit have eye on enemy
+    public bool rotateWait; //for performance
 
     public GameObject Bullet;
-    public GameObject FirePoint;
+    public GameObject FirePoint;    
     private bool reload;
 
-    public GameObject Turret;
+    public GameObject Turret;   //tanks shoot from turrets - the turret faces the enemy not the tank body
 
-    public List<Vector3> relocatetargets = new List<Vector3>();
+    public List<Vector3> relocatetargets = new List<Vector3>(); //stores list of vectors from the relocate targets
 
 
     NavMeshAgent agent;
@@ -83,13 +83,13 @@ public class Targeting : MonoBehaviour
         {
 
 
-            StartCoroutine(getTargets());
+            StartCoroutine(getTargets());   //if theres targets to get itll get targets
 
 
 
         }
-        if (closestTarget != null)
-        {
+        if (closestTarget != null)  //if there is a target in range - in the statement the unit faces them - if theres ally in the way itll rotate angles otheriwse itll start fireing
+        {                               //this works simularly to the Enemey behaviour script
 
             Vector3 raydirection = closestTarget.transform.position - gameObject.transform.position;
 
@@ -131,13 +131,13 @@ public class Targeting : MonoBehaviour
                         if (hitEnemey.transform.gameObject.tag == "Tank" || hitEnemey.transform.gameObject.tag == "Soilder")
                         {
 
-                            if (cansee == false)
+                            if (cansee == false)        //if the unit cannot see an enemy
                             {
 
-                                if (hitEnemey.transform.gameObject.GetComponent<Targeting>().cansee == true)
+                                if (hitEnemey.transform.gameObject.GetComponent<Targeting>().cansee == true) //if the unit infront can see and there is a close target
                                 {
 
-                                    StartCoroutine(rotateAngle());
+                                    StartCoroutine(rotateAngle());      //rotate to get a better angle
 
                                 }
                             }
@@ -151,17 +151,17 @@ public class Targeting : MonoBehaviour
                     if (hitEnemey.transform.gameObject.tag == "EnemySoldier"||
                         hitEnemey.transform.gameObject.tag == "EnemyTank"||
                         hitEnemey.transform.gameObject.tag == "EnemyHeli"||
-                        hitEnemey.transform.gameObject.tag == "EnemyBase")
+                        hitEnemey.transform.gameObject.tag == "EnemyBase")      //enemy tags
                     { 
 
-                        cansee = true;
+                        cansee = true;  //if the raycasts hits it means theres no obsticle or allies in the way
                         
 
                     }         
                     else 
                     {
                    
-                        cansee = false;
+                        cansee = false;     //if it hits somthng without these tags - it cant see it becuase somthing is in the way
                             
                     }
 
@@ -227,24 +227,24 @@ public class Targeting : MonoBehaviour
             rotateWait = false;
             
 
-            relocatetargets.Clear();
+            relocatetargets.Clear();    //clears list of points
 
             RELOCATE0trans = RELOCATE0.transform.position;
             RELOCATE1trans = RELOCATE1.transform.position;
             RELOCATE2trans = RELOCATE2.transform.position;
-            RELOCATE3trans = RELOCATE3.transform.position;
+            RELOCATE3trans = RELOCATE3.transform.position;      //gets new points and vectors as the unit mayve moved and the transforms need to be updated
 
             relocatetargets.Add(RELOCATE0trans);
             relocatetargets.Add(RELOCATE1trans);
-            relocatetargets.Add(RELOCATE2trans);
+            relocatetargets.Add(RELOCATE2trans);    //adds them to a list so they can be randomly selected
             relocatetargets.Add(RELOCATE3trans);
 
-            agent.stoppingDistance = 0;
-            agent.SetDestination(relocatetargets[0]);
+            agent.stoppingDistance = 0;     //becuase the distances are close highter values made it so the unit didnt move
+            agent.SetDestination(relocatetargets[Random.Range(0, 4)]); //chooses a random spot to send unit to out of the relocat targets
 
             yield return new WaitForSeconds(5f);
-            agent.stoppingDistance = 30;
-            rotateWait = true;
+            agent.stoppingDistance = 30;        //replaced stopping distance after 5 seconds
+            rotateWait = true;              //can cycle back round and reactivate if they still cannot see
         }
      
     }
@@ -268,9 +268,9 @@ public class Targeting : MonoBehaviour
 
     IEnumerator getTargets()
     {
-            targetLimiter = false;
+            targetLimiter = false;  //prevent this happening every update
 
-            EnemiesInRange.Clear();
+            EnemiesInRange.Clear();     //clears list to prevent nulls and missing obejcts being counted
             closestTarget = null;
 
 
@@ -280,7 +280,7 @@ public class Targeting : MonoBehaviour
 
            
 
-                if (distance <= Range)
+                if (distance <= Range)                                      //sorting alogrithm compares distances and save the shortest one and saves this - produces new bench marks if the previous is beaten
                 {
                     EnemiesInRange.Add(manager.Enemies[i]);
                 }
