@@ -1,7 +1,7 @@
-# H1 Defend-Capture
+# Defend-Capture
 
-## H2 Purpose
-This game is a smallscale RTS game built on the Unity game engine for the final year project.
+## Purpose
+**This game is a smallscale RTS game built on the Unity game engine for my final year project.**
 
 it features an AI system that aids the player units fight and a enemy AI script that helps the enemy fight
 there is a base building sub theme where the player must control building and resources to make their army
