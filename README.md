@@ -1,2 +1,12 @@
-# Defend-Capture
-3rd year final project. RTS with a focus on well fleshed out enemy AI 
+# H1 Defend-Capture
+
+## H2 Purpose
+This game is a smallscale RTS game built on the Unity game engine for the final year project.
+
+it features an AI system that aids the player units fight and a enemy AI script that helps the enemy fight
+there is a base building sub theme where the player must control building and resources to make their army
+Tanks, Helicopter and infantry play a large game of rock paper scissors to counter each other.
+
+
+
+The supervisor for the project was James Hayter.
